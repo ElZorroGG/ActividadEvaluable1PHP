@@ -27,3 +27,8 @@ $categoria = trim(strip_tags($categoria));
 $url = filter_var($url, FILTER_VALIDATE_URL) ? $url : null;
 $fecha = is_numeric($anio) ? (int)$anio : null;
 
+if ($file['size'] > 5 * 1024 * 1024) {
+        $_SESSION['ErrorAddGame'] = 'La imagen es demasiado grande (max 5MB).';
+        header('Location: add_game.php');
+        exit;
+    }
