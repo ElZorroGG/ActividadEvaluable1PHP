@@ -1,0 +1,31 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #000000;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    text-align: justify;
+    align-items: center;
+}
+button{
+    margin-left: 40%;
+    margin-top: 10%;
+}
+input{
+    margin-top:5%;
+}
+.nombre{
+    width:200px ;
+
+}
+.mail{
+    width: 220px;
+}
+.contraseña{
+    width: 165px;
+}
+.confirma{
+    width: 100px;
+}
