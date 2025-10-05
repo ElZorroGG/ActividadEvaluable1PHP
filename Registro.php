@@ -1,35 +1,55 @@
+<?php
+session_start();
+$error = $_SESSION['Error'] ?? '';
+$prefill = [
+   'nombre' => $_SESSION['nombre'] ?? '',
+   'mail' => $_SESSION['mail'] ?? ''
+];
+unset($_SESSION['Error'], $_SESSION['nombre'], $_SESSION['mail'], $_SESSION['contraseña']);
+?>
 <!DOCTYPE html>
 <html>
-   <header>
-      <link rel="stylesheet" href="estilo.css">
-   </header>
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1">
+   <link rel="stylesheet" href="Estilo.css">
+   <title>Registro</title>
+</head>
 <body>
-   <?php 
-      session_start();
-   ?>
+   <div class="container">
+      <div class="panel" style="max-width:480px;margin:auto;">
+         <h1>Registro</h1>
+         <?php if ($error): ?>
+            <div class="notice error"><?php echo htmlspecialchars($error); ?></div>
+         <?php endif; ?>
 
-<form action="Formulario.php" method="post" id="Formulario">
-   <label>Su nombre :</label>
-   <input name="nombre" id="nombre" type="text"  class=nombre value=<?php echo $_SESSION["nombre"] ?>><br>
+         <form action="Formulario.php" method="post" id="Formulario">
+            <div class="form-row">
+               <label for="nombre">Su nombre</label>
+               <input name="nombre" id="nombre" type="text" value="<?php echo htmlspecialchars($prefill['nombre']); ?>">
+            </div>
 
-   <label>Su Mail :</label>
-   <input name="email" id="email" type="text" class=mail value=<?php echo $_SESSION["mail"] ?> ><br>
+            <div class="form-row">
+               <label for="email">Su Mail</label>
+               <input name="email" id="email" type="text" value="<?php echo htmlspecialchars($prefill['mail']); ?>">
+            </div>
 
-   <label>Su contraseña :</label>
-   <input name="contraseña" id="contraseña" type="text"class=contraseña value=<?php echo $_SESSION["contraseña"] ?>><br>
+            <div class="form-row">
+               <label for="contraseña">Su contraseña</label>
+               <input name="contraseña" id="contraseña" type="password">
+            </div>
 
-   <label>Confirmar contraseña :</label>
-   <input name="CorfirmaContraseña" id="contraseña" type="text" class="confirma"value=<?php echo $_SESSION["contraseña"] ?>><br>
+            <div class="form-row">
+               <label for="CorfirmaContraseña">Confirmar contraseña</label>
+               <input name="CorfirmaContraseña" id="CorfirmaContraseña" type="password">
+            </div>
 
-   <button type="submit">Validar</button>
-</form>
-
-<?php 
-   if(isset($_SESSION["Error"])&& $_SESSION["Error"]!=''){
-      Echo $_SESSION["Error"].".";
-      $_SESSION["Error"] = "";
-   }
-?>
-
+            <div class="actions">
+               <button type="submit">Validar</button>
+               <a class="button secondary" href="login.php">Volver</a>
+            </div>
+         </form>
+      </div>
+   </div>
 </body>
 </html>

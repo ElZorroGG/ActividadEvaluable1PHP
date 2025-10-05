@@ -1,48 +1,49 @@
-<!DOCTYPE html>
-<html>
 <?php
 session_start();
 require("Conexion.php");
-$Error;
-$copia;
+
+$error = '';
+$nombre = trim($_POST['nombre'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$pass = $_POST['contraseña'] ?? '';
+$pass2 = $_POST['CorfirmaContraseña'] ?? '';
+
+if ($nombre === '') {
+    $error .= 'Nombre vacío. ';
+}
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $error .= 'Mail no válido. ';
+}
+if ($pass === '' || $pass !== $pass2) {
+    $error .= 'Contraseñas no coinciden. ';
+}
+
+if ($error !== '') {
+    $_SESSION['Error'] = $error;
+    $_SESSION['nombre'] = $nombre;
+    $_SESSION['mail'] = $email;
+    header('Location: Registro.php');
+    exit;
+}
+
 try {
-    //Preparar SQL
-    $stmt = $conn->prepare("INSERT INTO users (Nombre,password,mail) VALUES (:nombre, :contrasena, :email)");
-    $stmt->bindParam(':nombre',$nombre);
-    $stmt->bindParam(':contrasena',$contraseña);
-    $stmt->bindParam(':email',$mail);
-    
-    //Poner nombres
-    if(isset($_POST["nombre"])&&$_POST["nombre"]!=''){
-    $nombre=$_POST["nombre"];
-    }else $Error=$Error."Nombre vacio";
-    if(filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)){
-        $mail=$_POST["email"];
-    }else $Error=$Error. " Mail No Valido";
-    
-    if($_POST["contraseña"]==$_POST["CorfirmaContraseña"]){
-        $copia=$_POST["contraseña"];
-        $contraseña= password_hash($_POST["contraseña"],PASSWORD_DEFAULT);
-    }else $Error=$Error." Contraseña incorrecta";
+    $hash = password_hash($pass, PASSWORD_DEFAULT);
+    $stmt = $conn->prepare('INSERT INTO users (Nombre, password, mail) VALUES (:nombre, :password, :mail)');
+    $stmt->bindValue(':nombre', $nombre);
+    $stmt->bindValue(':password', $hash);
+    $stmt->bindValue(':mail', $email);
     $stmt->execute();
 
-    echo "Insert completado";
+    // autenticar al usuario recién creado
+    $_SESSION['Log'] = $email;
+    $_SESSION['Usuario'] = $nombre;
+    $_SESSION['user_id'] = $conn->lastInsertId();
+    header('Location: Session.php');
+    exit;
 } catch (PDOException $e) {
-    $_SESSION["Error"]=$Error;
-    $_SESSION["nombre"]=$nombre;
-    $_SESSION["contraseña"]=$copia;
-    $_SESSION["mail"]=$mail;
-    header("Location: Registro.php");
-    die;
+    $_SESSION['Error'] = 'Error al crear usuario: ' . $e->getMessage();
+    $_SESSION['nombre'] = $nombre;
+    $_SESSION['mail'] = $email;
+    header('Location: Registro.php');
+    exit;
 }
-    
-    if ($mail!=null) {
-        $_SESSION["Log"]=$mail;
-        $_SESSION["Usuario"]=$nombre;
-        header("Location: Session.php");
-    }
-    
-
-$conn=null;
-?>
-</html>
