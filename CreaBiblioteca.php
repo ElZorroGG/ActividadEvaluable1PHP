@@ -5,11 +5,9 @@ if (!isset($_SESSION["Usuario"])){
     die;
 }
 
-// Evitar warning si las claves no existen
 $error = $_SESSION["ErrorAñadirJuego"] ?? '';
 $exito = $_SESSION["ExitoAñadirJuego"] ?? '';
 
-// Limpiar mensajes una vez leídos para que no persistan
 unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"]);
 ?>
 <!DOCTYPE html>
@@ -20,8 +18,9 @@ unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"]);
     <link rel="stylesheet" href="Estilo.css">
 </head>
 <body>
-        <div class="container">
-            <div class="panel">
+            <div class="container">
+                <?php include_once 'menu.php'; ?>
+                <div class="panel">
                 <h1>Ingresa un juego a la biblioteca</h1>
 
                 <?php if (!empty($error)): ?>

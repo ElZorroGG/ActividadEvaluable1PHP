@@ -15,6 +15,7 @@ unset($_SESSION['ErrorLogin'], $_SESSION['nombre_login']);
 ?>
 
 <div class="container">
+  <?php include_once 'menu.php'; ?>
   <div class="panel">
     <h1>Iniciar sesión</h1>
     <?php if ($error): ?>

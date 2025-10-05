@@ -47,14 +47,17 @@ h1{margin:0 0 12px 0;font-size:20px;color:var(--accent)}
 
 .form-row{display:flex;flex-direction:column;margin-bottom:12px}
 label{font-size:13px;color:var(--muted);margin-bottom:6px}
-input[type='text'], input[type='number'], textarea, select{
+input[type='text'], input[type='email'], input[type='password'], input[type='number'], textarea, select{
     width:100%;
     padding:10px 12px;
     border-radius:8px;
     border:1px solid rgba(255,255,255,0.03);
     background:var(--glass);
     color:var(--accent);
+    min-height:44px;
+    font-size:14px;
 }
+input::placeholder{color:rgba(154,167,176,0.45)}
 textarea{min-height:110px;resize:vertical}
 
 .actions{display:flex;gap:12px;align-items:center;margin-top:8px}
@@ -79,3 +82,53 @@ button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);
 
 /* Utility */
 .center{display:flex;align-items:center;justify-content:center}
+
+/* Menu */
+.menu{width:100%;margin-bottom:16px}
+.menu .menu-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow: 0 6px 18px rgba(2,6,12,0.45);max-width:920px;margin:0 auto}
+
+/* When menu is placed inside .container, make it occupy the left column */
+.container > .menu{grid-column:1 / 2;align-self:start}
+.container > .menu .menu-inner{max-width:100%;margin:0}
+.container > .menu .brand{margin-left:6px}
+/* Alinear la columna de consejos en la segunda columna y con el inicio del formulario */
+.container > aside.side{grid-column:2 / 3;align-self:start;padding-top:6px}
+.side .card{text-align:left}
+.menu .brand a{color:var(--accent);font-weight:700;text-decoration:none;font-size:16px;padding:6px 8px;border-radius:8px}
+.menu .brand a:hover{filter:brightness(1.05)}
+.menu .menu-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--accent);padding:6px 10px;border-radius:8px;font-size:18px;cursor:pointer}
+.menu .menu-list{list-style:none;padding:0;margin:0;display:flex;gap:8px;align-items:center}
+.menu .menu-list li a{color:var(--accent);text-decoration:none;padding:8px 12px;border-radius:8px;border:1px solid transparent;transition:all .16s}
+.menu .menu-list li a:hover{background:rgba(0,229,255,0.06);border-color:rgba(0,229,255,0.08);transform:translateY(-2px)}
+.menu .menu-list li a.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:6px 10px}
+
+/* Mobile: collapse into hamburger */
+@media (max-width:640px){
+    .menu .menu-inner{padding:10px}
+    .menu .menu-toggle{display:inline-flex}
+    .menu .menu-list{position:absolute;left:12px;right:12px;top:72px;display:flex;flex-direction:column;gap:8px;padding:12px;background:linear-gradient(180deg, rgba(2,6,12,0.9), rgba(2,6,12,0.95));border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,12,0.6);transform-origin:top;opacity:0;pointer-events:none;transition:all .18s}
+    .menu.open .menu-list{opacity:1;pointer-events:auto;transform:translateY(0)}
+    .menu .menu-list li a{display:block}
+}
+
+/* Focus states for accessibility */
+.menu .menu-list li a:focus,.menu .brand a:focus,.menu .menu-toggle:focus{outline:2px solid rgba(0,229,255,0.12);outline-offset:3px}
+
+/* Games grid */
+.grid-games{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-top:12px}
+.game-card{background:rgba(255,255,255,0.02);border-radius:8px;padding:8px;display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit}
+.game-card .cover{width:100%;height:160px;object-fit:cover;border-radius:6px;margin-bottom:8px}
+.game-card .meta{width:100%;text-align:left;padding:0 4px}
+.game-card .title{font-weight:700;color:var(--accent);font-size:14px;margin-bottom:4px}
+.game-card .author{color:var(--muted);font-size:12px}
+
+/* Active tab visual */
+.active-tab{background:rgba(0,229,255,0.08);border-radius:8px;padding:6px 10px;color:var(--accent);margin-left:8px}
+
+@media (max-width:640px){
+    .game-card .cover{height:120px}
+}
+
+/* Detail view */
+.game-detail{display:flex;flex-direction:column;gap:12px}
+.cover-large img{max-width:420px}
