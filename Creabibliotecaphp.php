@@ -29,6 +29,16 @@ if ($titulo === '') {
 
 
 $rutaPortada = null;
+$carpetaSubidas = __DIR__ . DIRECTORY_SEPARATOR . 'caratulas';
+if (!is_dir($carpetaSubidas)) {
+    mkdir($carpetaSubidas, 0755);
+}
+
+$carpetaDefecto = __DIR__ . DIRECTORY_SEPARATOR . 'CaratulaPorDefecto';
+if (!is_dir($carpetaDefecto)) {
+    mkdir($carpetaDefecto, 0755);
+}
+
 if (isset($_FILES["Portada"]) && $_FILES["Portada"]["error"] == UPLOAD_ERR_OK) {
     $temporal = $_FILES["Portada"]["tmp_name"];
     $size = $_FILES["Portada"]["size"];
@@ -51,15 +61,10 @@ if (isset($_FILES["Portada"]) && $_FILES["Portada"]["error"] == UPLOAD_ERR_OK) {
     }
 
 
-    $carpeta = __DIR__ . DIRECTORY_SEPARATOR . 'CaratulaPorDefecto';
-    if (!is_dir($carpeta)) {
-        mkdir($carpeta, 0755);
-    }
-
     $contenido = file_get_contents($temporal);
     $hash = hash('sha256', $contenido);
     $nuevoNombre = $hash . '.' . $ext;
-    $destino = $carpeta . DIRECTORY_SEPARATOR . $nuevoNombre;
+    $destino = $carpetaSubidas . DIRECTORY_SEPARATOR . $nuevoNombre;
 
     $intentos = 0;
     while (file_exists($destino) && $intentos < 5) {
@@ -70,11 +75,21 @@ if (isset($_FILES["Portada"]) && $_FILES["Portada"]["error"] == UPLOAD_ERR_OK) {
     }
 
     if (move_uploaded_file($temporal, $destino)) {
-           $rutaPortada = 'CaratulaPorDefecto/' . $nuevoNombre; 
+           $rutaPortada = 'caratulas/' . $nuevoNombre; 
     } else {
         $_SESSION["ErrorAñadirJuego"] = "No se pudo guardar la imagen.";
         header("Location: CreaBiblioteca.php");
         exit;
+    }
+}
+
+if ($rutaPortada === null) {
+    $archivosDef = glob($carpetaDefecto . DIRECTORY_SEPARATOR . '*.{jpg,jpeg,png,gif,webp}', GLOB_BRACE);
+    if (!empty($archivosDef)) {
+        $nombreDef = basename($archivosDef[0]);
+        $rutaPortada = 'CaratulaPorDefecto/' . $nombreDef;
+    } else {
+        $rutaPortada = null;
     }
 }
 
