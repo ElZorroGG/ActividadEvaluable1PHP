@@ -4,8 +4,13 @@ if (!isset($_SESSION["Usuario"])){
     header("location: login.php");
     die;
 }
-$error =$_SESSION["ErrorAñadirJuego"];
-$exito=$_SESSION["ExitoAñadirJuego"];
+
+// Evitar warning si las claves no existen
+$error = $_SESSION["ErrorAñadirJuego"] ?? '';
+$exito = $_SESSION["ExitoAñadirJuego"] ?? '';
+
+// Limpiar mensajes una vez leídos para que no persistan
+unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"]);
 ?>
 <!DOCTYPE html>
 <html lang="es">

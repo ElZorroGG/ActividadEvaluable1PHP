@@ -10,7 +10,8 @@
 session_start();
 $error = $_SESSION['ErrorLogin'] ?? '';
 $prefill = $_SESSION['nombre_login'] ?? $_SESSION['nombre'] ?? '';
-// Limpiar mensajes para que no persistan
+
+
 unset($_SESSION['ErrorLogin'], $_SESSION['nombre_login']);
 ?>
 
