@@ -6,7 +6,7 @@ require("Conexion.php");
 
 if (empty($_SESSION["Usuario"]) || (empty($_SESSION["user_id"]) && empty($_SESSION["id"]))) {
     $_SESSION["ErrorAñadirJuego"] = "Debes iniciar sesión para añadir un juego.";
-    header("Location: ../Recogida de datos/login.php");
+    header("Location: login.php");
     exit;
 }
 
@@ -23,7 +23,7 @@ $fecha = isset($_POST["Fecha"]) ? (int)$_POST["Fecha"] : null;
 
 if ($titulo === "") {
     $_SESSION["ErrorAñadirJuego"] = "El título es obligatorio.";
-    header("Location: ../Recogida de datos/CreaBiblioteca.php");
+    header("Location: CreaBiblioteca.php");
     exit;
 }
 
@@ -46,7 +46,7 @@ if (isset($_FILES["Portada"]) && $_FILES["Portada"]["error"] == UPLOAD_ERR_OK) {
 
     if ($size > 5 * 1024 * 1024) {
         $_SESSION["ErrorAñadirJuego"] = "La imagen es demasiado grande (max 5MB).";
-    header("Location: ../Recogida de datos/CreaBiblioteca.php");
+        header("Location: CreaBiblioteca.php");
         exit;
     }
 
@@ -56,7 +56,7 @@ if (isset($_FILES["Portada"]) && $_FILES["Portada"]["error"] == UPLOAD_ERR_OK) {
     $permitidas = array("jpg", "jpeg", "png", "gif", "webp");
     if (!in_array($ext, $permitidas)) {
         $_SESSION["ErrorAñadirJuego"] = "Tipo de imagen no permitido. Usa JPG, PNG, GIF o WEBP.";
-    header("Location: ../Recogida de datos/CreaBiblioteca.php");
+        header("Location: CreaBiblioteca.php");
         exit;
     }
 
@@ -78,7 +78,7 @@ if (isset($_FILES["Portada"]) && $_FILES["Portada"]["error"] == UPLOAD_ERR_OK) {
            $rutaPortada = "caratulas/" . $nuevoNombre; 
     } else {
         $_SESSION["ErrorAñadirJuego"] = "No se pudo guardar la imagen.";
-    header("Location: ../Recogida de datos/CreaBiblioteca.php");
+        header("Location: CreaBiblioteca.php");
         exit;
     }
 }
@@ -121,5 +121,5 @@ try {
     $_SESSION["ErrorAñadirJuego"] = "Error al guardar el juego: " . $e->getMessage();
 }
 
-header("Location: ../Recogida de datos/CreaBiblioteca.php");
+header("Location: CreaBiblioteca.php");
 exit;

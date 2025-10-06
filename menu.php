@@ -7,15 +7,15 @@ $logged = !empty($_SESSION["Usuario"]);
 ?>
 <nav class="menu" id="site-menu">
   <div class="menu-inner">
-  <div class="brand"><a href="../Recogida de datos/Session.php">Menú</a></div>
+  <div class="brand"><a href="Session.php">Menú</a></div>
     <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
     <ul class="menu-list" id="menu-list">
       <?php if (!$logged): ?>
-        <li><a href="../Recogida de datos/Registro.php">Registrarse</a></li>
-        <li><a href="../Recogida de datos/login.php">Iniciar sesión</a></li>
+        <li><a href="Registro.php">Registrarse</a></li>
+        <li><a href="login.php">Iniciar sesión</a></li>
       <?php else: ?>
-        <li><a href="../Recogida de datos/CreaBiblioteca.php">Crear juego</a></li>
-        <li><a href="../PHP/VerJuegos.php">Ver juegos</a></li>
+        <li><a href="CreaBiblioteca.php">Crear juego</a></li>
+        <li><a href="VerJuegos.php">Ver juegos</a></li>
         <li><a class="secondary" href="cerrarSession.php">Cerrar sesión</a></li>
       <?php endif; ?>
     </ul>

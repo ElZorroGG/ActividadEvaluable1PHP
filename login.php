@@ -15,14 +15,14 @@ unset($_SESSION["ErrorLogin"], $_SESSION["nombre_login"]);
 ?>
 
 <div class="container">
-  <?php include_once "../Recogida de datos/menu.php"; ?>
+  <?php include_once "menu.php"; ?>
   <div class="panel">
     <h1>Iniciar sesión</h1>
     <?php if ($error): ?>
       <div class="notice error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
 
-  <form action="../PHP/AutenticacionLogin.php" method="post">
+    <form action="AutenticacionLogin.php" method="post">
       <div class="form-row">
         <label for="nombre">Nombre</label>
         <input id="nombre" name="nombre" type="text" value="<?php echo htmlspecialchars($prefill); ?>" required>

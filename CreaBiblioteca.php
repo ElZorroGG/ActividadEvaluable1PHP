@@ -19,7 +19,7 @@ unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"]);
 </head>
 <body>
             <div class="container">
-                <?php include_once "../Recogida de datos/menu.php"; ?>
+                <?php include_once "menu.php"; ?>
                 <div class="panel">
                 <h1>Ingresa un juego a la biblioteca</h1>
 
@@ -30,7 +30,7 @@ unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"]);
                     <div class="notice success"><?php echo htmlspecialchars($exito); ?></div>
                 <?php endif; ?>
 
-                <form action="../PHP/Creabibliotecaphp.php" method="post" enctype="multipart/form-data">
+                <form action="Creabibliotecaphp.php" method="post" enctype="multipart/form-data">
 
                     <div class="form-row">
                         <label for="NombreJuego">Nombre del Juego:</label>
