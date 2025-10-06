@@ -13,7 +13,7 @@ unset($_SESSION["ErrorEditar"], $_SESSION["ExitoEditar"]);
   <link rel="stylesheet" href="Estilo.css">
 </head>
 <body>
-<?php include "menu.php"; ?>
+<?php include "../Recogida de datos/menu.php"; ?>
 
 <div class="container">
   <div class="panel">
@@ -25,7 +25,7 @@ unset($_SESSION["ErrorEditar"], $_SESSION["ExitoEditar"]);
       <div class="notice success"><?php echo htmlspecialchars($success); ?></div>
     <?php endif; ?>
 
-    <form action="VerJuegoEditar.php?id=<?php echo (int)$game["id"]; ?>" method="post" enctype="multipart/form-data">
+  <form action="../PHP/VerJuegoEditarphp.php?id=<?php echo (int)$game["id"]; ?>" method="post" enctype="multipart/form-data">
       <div class="form-row">
         <label for="Titulo">Titulo</label>
         <input id="Titulo" name="Titulo" type="text" value="<?php echo htmlspecialchars($game["titulo"]); ?>" required>
@@ -63,7 +63,7 @@ unset($_SESSION["ErrorEditar"], $_SESSION["ExitoEditar"]);
 
       <div class="actions">
         <button type="submit">Guardar cambios</button>
-        <a class="button secondary" href="VerJuego.php?id=<?php echo (int)$game["id"]; ?>">Cancelar</a>
+  <a class="button secondary" href="../PHP/VerJuego.php?id=<?php echo (int)$game["id"]; ?>">Cancelar</a>
       </div>
     </form>
   </div>

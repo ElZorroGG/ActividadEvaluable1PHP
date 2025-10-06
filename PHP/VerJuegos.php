@@ -1,10 +1,10 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 if (!isset($_SESSION["Usuario"])) {
-    header("Location: login.php");
+    header("Location: ../Recogida de datos/login.php");
     exit;
 }
-require_once "Conexion.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Conexion.php";
 
 $userId = (int)($_SESSION["user_id"] ?? 0);
 
@@ -24,4 +24,4 @@ try {
 }
 
 $games = ["todos" => $todos, "mios" => $mios];
-require "VerJuegos.php";
+require __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Recogida de datos" . DIRECTORY_SEPARATOR . "VerJuegosphp.php";

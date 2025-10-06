@@ -11,7 +11,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
-<?php include "Recogida de datos/menu.php"; ?>
+<?php include "menu.php"; ?>
 
 <div class="container">
   <div class="panel">
@@ -34,7 +34,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
             $title = htmlspecialchars($j["titulo"]);
             $autor = htmlspecialchars($j["autor"]);
           ?>
-          <a class="game-card" href="PHP/VerJuego.php?id=<?php echo (int)$j["id"]; ?>">
+          <a class="game-card" href="../PHP/VerJuego.php?id=<?php echo (int)$j["id"]; ?>">
             <img src="<?php echo $img; ?>" alt="<?php echo $title; ?>" class="cover" loading="lazy">
             <div class="meta">
               <div class="title"><?php echo $title; ?></div>
@@ -52,7 +52,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
             $title = htmlspecialchars($j["titulo"]);
             $autor = htmlspecialchars($j["autor"]);
           ?>
-          <a class="game-card" href="PHP/VerJuego.php?id=<?php echo (int)$j["id"]; ?>">
+          <a class="game-card" href="../PHP/VerJuego.php?id=<?php echo (int)$j["id"]; ?>">
             <img src="<?php echo $img; ?>" alt="<?php echo $title; ?>" class="cover" loading="lazy">
             <div class="meta">
               <div class="title"><?php echo $title; ?></div>

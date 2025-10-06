@@ -1,14 +1,14 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 if (!isset($_SESSION["Usuario"])) {
-    header("Location: login.php");
+    header("Location: ../Recogida de datos/login.php");
     exit;
 }
-require_once "Conexion.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Conexion.php";
 
 $id = isset($_GET["id"]) ? (int)$_GET["id"] : 0;
 if ($id <= 0) {
-    header("Location: VerJuegos.php");
+    header("Location: ../PHP/VerJuegos.php");
     exit;
 }
 
@@ -21,8 +21,9 @@ try {
 }
 
 if (!$game) {
-    header("Location: VerJuegos.php");
+    header("Location: ../PHP/VerJuegos.php");
     exit;
 }
 
-require "VerJuegophp.php";
+require __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Recogida de datos" . DIRECTORY_SEPARATOR . "VerJuegophp.php";
+?>

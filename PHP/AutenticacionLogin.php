@@ -29,21 +29,20 @@ try {
         $_SESSION["Log"] = $user["mail"];
         $_SESSION["Usuario"] = $user["Nombre"];
         $_SESSION["user_id"] = $user["id"];
-        header("Location: Session.php");
+            header("Location: ../Recogida de datos/Session.php");
         exit;
     } else {
         $_SESSION["ErrorLogin"] = "Nombre o contraseña incorrectos.";
         $_SESSION["nombre_login"] = $nombre;
-        header("Location: login.php");
+    header("Location: ../Recogida de datos/login.php");
         exit;
     }
 } catch (PDOException $e) {
 
     $_SESSION["ErrorLogin"] = "Error de conexión: " . $e->getMessage();
-    header("Location: login.php");
+    header("Location: ../Recogida de datos/login.php");
     exit;
 }
 
 
 ?>
-p´ñ

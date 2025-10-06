@@ -10,7 +10,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
   <link rel="stylesheet" href="Estilo.css">
 </head>
 <body>
-<?php include "Recogida de datos/menu.php"; ?>
+<?php include "../Recogida de datos/menu.php"; ?>
 
 <div class="container">
   <div class="panel">
@@ -32,9 +32,9 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
     </div>
 
     <div style="margin-top:12px">
-      <a class="button" href="PHP/VerJuegos.php">Volver a la lista</a>
+  <a class="button" href="../PHP/VerJuegos.php">Volver a la lista</a>
       <?php if ((int)($game["user_id"] ?? 0) === (int)($_SESSION["user_id"] ?? $_SESSION["id"] ?? 0)): ?>
-        <a class="button" href="PHP/VerJuegoEditarphp.php?id=<?php echo (int)$game["id"]; ?>">Editar</a>
+  <a class="button" href="../PHP/VerJuegoEditarphp.php?id=<?php echo (int)$game["id"]; ?>">Editar</a>
       <?php endif; ?>
     </div>
   </div>

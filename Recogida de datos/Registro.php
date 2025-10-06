@@ -17,14 +17,14 @@ unset($_SESSION["Error"], $_SESSION["nombre"], $_SESSION["mail"], $_SESSION["con
 </head>
 <body>
 <div class="container">
-  <?php include_once "menu.php"; ?>
+  <?php include_once "../Recogida de datos/menu.php"; ?>
   <div class="panel">
     <h1>Registro</h1>
     <?php if ($error): ?>
       <div class="notice error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
 
-    <form action="Formulario.php" method="post" id="Formulario">
+  <form action="../PHP/Formulario.php" method="post" id="Formulario">
       <div class="form-row">
         <label for="nombre">Su nombre</label>
         <input name="nombre" id="nombre" type="text" value="<?php echo htmlspecialchars($prefill["nombre"]); ?>" required>
