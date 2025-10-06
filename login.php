@@ -34,9 +34,18 @@ unset($_SESSION["ErrorLogin"], $_SESSION["nombre_login"]);
       </div>
 
       <div class="actions">
-        <button type="submit">Entrar</button>
-        <a class="button secondary" href="Registro.php">Regístrate</a>
+        <button type="submit" style="display:none">Entrar</button>
       </div>
+
+      <div class="menu" style="margin-top:12px;display:flex;justify-content:center">
+        <div class="menu-inner" style="padding:6px 8px">
+          <div class="menu-list">
+            <button type="submit" formmethod="post" formaction="AutenticacionLogin.php">Entrar</button>
+          </div>
+        </div>
+      </div>
+
+  <div style="text-align:center;margin-top:8px;color:var(--muted)">o también puedes <a class="menu-btn" href="Registro.php">registrarte</a></div>
     </form>
   </div>
 </div>

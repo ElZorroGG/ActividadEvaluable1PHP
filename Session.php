@@ -18,12 +18,16 @@ if (!isset($_SESSION["Usuario"])) {
 
 <div class="container">
     <div class="panel">
-    <h1>Bienvenido <?php echo htmlspecialchars($_SESSION["Usuario"]); ?></h1>
-        <p class="small">Desde aquí puedes crear un juego o ver la lista completa.</p>
-        <div class="actions" style="margin-top:16px">
-            <a class="button" href="CreaBiblioteca.php">Crear juego</a>
-            <a class="button secondary" href="VerJuegos.php">Ver juegos</a>
-        </div>
+        <h1 style="text-align:center">Bienvenido <?php echo htmlspecialchars($_SESSION["Usuario"]); ?></h1>
+                <p class="small" style="text-align:center">Desde aquí puedes crear un juego o ver la lista completa.</p>
+                <div class="menu" style="margin-top:16px;display:flex;justify-content:center">
+                    <div class="menu-inner" style="padding:6px 8px">
+                        <div class="menu-list">
+                            <a href="CreaBiblioteca.php">Crear juego</a>
+                            <a href="VerJuegos.php">Ver juegos</a>
+                        </div>
+                    </div>
+                </div>
     </div>
 </div>
 </body>

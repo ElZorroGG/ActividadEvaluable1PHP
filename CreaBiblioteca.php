@@ -50,10 +50,20 @@ unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"]);
                     <div class="form-row">
                         <label for="Categoria">Categoria del juego:</label>
                         <select id="Categoria" name="Categoria">
-                            <option value="RTS">Estrategia en tiempo real</option>
-                            <option value="Shooter">Shooter</option>
-                            <option value="Simulacion">Simulacion</option>
+                            <option value="Accion">Acción</option>
+                            <option value="Aventura">Aventura</option>
+                            <option value="RPG">RPG / Rol</option>
+                            <option value="Estrategia">Estrategia (RTS/TBS)</option>
+                            <option value="Shooter">Shooter / FPS</option>
+                            <option value="Simulacion">Simulación</option>
+                            <option value="Deportes">Deportes</option>
                             <option value="Carreras">Carreras</option>
+                            <option value="Puzzle">Puzzle / Rompecabezas</option>
+                            <option value="Indie">Indie</option>
+                            <option value="MMO">MMO / Multijugador masivo</option>
+                            <option value="Sandbox">Sandbox / Mundo abierto</option>
+                            <option value="Horror">Horror / Survival</option>
+                            <option value="EstrategiaTactica">Táctico / Estrategia por turnos</option>
                         </select>
                     </div>
 
@@ -72,6 +82,13 @@ unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"]);
                         <input id="Portada" name="Portada" type="file" accept="image/*">
                     </div>
 
+                    <div class="form-row consejo-row">
+                        <div class="card consejo-card">
+                            <strong>Consejo:</strong>
+                            <div class="small">Sube una portada clara en formato JPG o PNG. Max 5MB.</div>
+                        </div>
+                    </div>
+
                     <div class="actions">
                         <button type="submit">Guardar juego</button>
                         <a class="button secondary" href="Session.php">Volver</a>
@@ -80,34 +97,7 @@ unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"]);
                 </form>
             </div>
 
-            <aside class="side">
-                <div class="card">
-                    <strong>Consejo:</strong>
-                    <div class="small">Sube una portada clara en formato JPG o PNG. Max 5MB.</div>
+
                 </div>
-                <div class="card">
-                    <strong>Atajo:</strong>
-                    <div class="small">Si no subes imagen se usará la carátula por defecto.</div>
-                </div>
-            </aside>
-
-        </div>
-  <p><a href="Session.php">Volver</a></p>
-    <form action="logout.php" method="post" style="display:inline">
-    <button type="submit">Cerrar sesión</button>
-  </form>
 </body>
-</html>
-</body>
-
-
-
-
-
-
-
-
-
-
-
 </html>

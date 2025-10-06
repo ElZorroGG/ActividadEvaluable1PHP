@@ -27,14 +27,14 @@ body{
 
 .container{
     width:100%;
-    max-width:920px;
+    max-width:1200px;
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     border:1px solid rgba(255,255,255,0.03);
     border-radius:14px;
     padding:28px;
     box-shadow: 0 8px 30px rgba(2,6,12,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
     display:grid;
-    grid-template-columns: 1fr 380px;
+    grid-template-columns: 1fr; /* single column container so games can expand */
     gap:24px;
 }
 
@@ -44,7 +44,7 @@ body{
     border-radius:10px;
 }
 
-h1{margin:0 0 12px 0;font-size:20px;color:var(--accent)}
+h1{margin:0 0 12px 0;font-size:24px;color:var(--accent);text-align:center}
 
 .form-row{display:flex;flex-direction:column;margin-bottom:12px}
 label{font-size:13px;color:var(--muted);margin-bottom:6px}
@@ -61,12 +61,18 @@ input[type='text'], input[type='email'], input[type='password'], input[type='num
 input::placeholder{color:rgba(154,167,176,0.45)}
 textarea{min-height:110px;resize:vertical}
 
-.actions{display:flex;gap:12px;align-items:center;margin-top:8px}
+.actions{display:flex;gap:12px;align-items:center;margin-top:8px;justify-content:center}
 button{background:linear-gradient(90deg,var(--accent), #7ad9ff);border:none;color:#022; padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:600}
 button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
 
 .side{padding:20px;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center}
 .card{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;width:100%;text-align:center}
+
+/* consejo placement under Portada */
+.consejo-row{display:flex;justify-content:center;margin:10px 0;text-align:center}
+.consejo-card{max-width:520px;margin:0 auto;display:block;text-align:center;width:100%}
+/* make sure panel-level placement keeps it centered */
+.panel .consejo-row{width:100%;justify-content:center}
 
 .notice{padding:10px 12px;border-radius:8px;margin-bottom:12px}
 .error{background:linear-gradient(90deg,var(--danger), #ff7a8b);color:#fff}
@@ -80,6 +86,65 @@ button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);
 
 /* Form tweaks */
 .file-input{padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.03);text-align:center}
+
+/* Make native file input visually match other inputs */
+.file-input input[type="file"]{
+    width:100%;
+    padding:10px 12px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,0.03);
+    background:var(--glass);
+    color:var(--accent);
+    min-height:44px;
+    font-size:14px;
+    cursor:pointer;
+    display:inline-block;
+}
+
+/* WebKit/Blink file button */
+.file-input input[type="file"]::-webkit-file-upload-button{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    color:var(--accent);
+    padding:8px 12px;
+    border-radius:8px;
+    margin-right:12px;
+    cursor:pointer;
+}
+
+/* Firefox file button */
+.file-input input[type="file"]::file-selector-button{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    color:var(--accent);
+    padding:8px 12px;
+    border-radius:8px;
+    margin-right:12px;
+    cursor:pointer;
+}
+
+.file-input input[type="file"]:focus{outline:2px solid rgba(0,229,255,0.08);outline-offset:2px}
+
+/* Better-looking select dropdowns: use same glass background as other inputs */
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: var(--glass);
+    border:1px solid rgba(255,255,255,0.03);
+    color: var(--accent);
+    padding-right:36px; /* room for arrow */
+}
+
+/* Options: try to keep them dark and readable across browsers */
+select option{
+    background: #0b1114;
+    color: var(--accent);
+}
+
+select:focus{outline:2px solid rgba(0,229,255,0.08);outline-offset:2px}
+
+/* keep native select styling (we removed the JS custom-select to avoid conflicts) */
 
 /* Utility */
 .center{display:flex;align-items:center;justify-content:center}
@@ -100,8 +165,20 @@ nav#site-menu .menu-inner{display:flex;align-items:center;justify-content:space-
 .menu .brand a:hover{filter:brightness(1.05)}
 nav#site-menu .menu-toggle, .menu .menu-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--accent);padding:6px 10px;border-radius:8px;font-size:18px;cursor:pointer}
 nav#site-menu .menu-list, .menu .menu-list{list-style:none;padding:0;margin:0;display:flex;gap:8px;align-items:center}
-nav#site-menu .menu-list li a, .menu .menu-list li a{color:var(--accent);text-decoration:none;padding:8px 12px;border-radius:8px;border:1px solid transparent;transition:all .16s}
-nav#site-menu .menu-list li a:hover, .menu .menu-list li a:hover{background:rgba(0,229,255,0.06);border-color:rgba(0,229,255,0.08);transform:translateY(-2px)}
+/* anchors inside .menu .menu-list may be direct children (no <li>) so include both patterns */
+nav#site-menu .menu-list li a, .menu .menu-list li a, .menu .menu-list a, .menu .menu-list a:visited{
+    color:var(--accent);
+    text-decoration:none;
+    padding:8px 12px;
+    border-radius:8px;
+    border:1px solid transparent;
+    transition:all .16s;
+    display:inline-block;
+}
+/* ensure anchors don't show browser default underline */
+.menu .menu-list a, .menu .menu-list a:visited{ text-decoration:none; color:inherit }
+.menu .menu-list a, .menu .menu-list a:visited{ text-decoration:none; color:inherit }
+nav#site-menu .menu-list li a:hover, .menu .menu-list li a:hover, .menu .menu-list a:hover{background:rgba(0,229,255,0.06);border-color:rgba(0,229,255,0.08);transform:translateY(-2px)}
 .menu .menu-list li a.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:6px 10px}
 
 /* Mobile: collapse into hamburger */
@@ -117,15 +194,68 @@ nav#site-menu .menu-list li a:hover, .menu .menu-list li a:hover{background:rgba
 .menu .menu-list li a:focus,.menu .brand a:focus,.menu .menu-toggle:focus{outline:2px solid rgba(0,229,255,0.12);outline-offset:3px}
 
 /* Games grid */
-.grid-games{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-top:12px}
-.game-card{background:rgba(255,255,255,0.02);border-radius:8px;padding:8px;display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit}
-.game-card .cover{width:100%;height:160px;object-fit:cover;border-radius:6px;margin-bottom:8px}
-.game-card .meta{width:100%;text-align:left;padding:0 4px}
-.game-card .title{font-weight:700;color:var(--accent);font-size:14px;margin-bottom:4px}
-.game-card .author{color:var(--muted);font-size:12px}
+.grid-games{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:12px}
+.game-card{position:relative;border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;display:block;height:320px;box-shadow: 0 10px 30px rgba(0,0,0,0.6)}
+.game-card::before{content:'';position:absolute;inset:0;background-image:var(--bg-url);background-size:cover;background-position:center center;filter:brightness(0.35);transition:filter .18s}
+.game-card:hover::before{filter:brightness(0.5)}
+.game-card .meta-overlay{position:absolute;left:0;right:0;bottom:0;padding:12px;background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.85) 100%);color:#fff}
+.game-card .meta{display:flex;flex-direction:column;gap:4px}
+.game-card .title{font-weight:700;color:var(--accent);font-size:16px}
+.game-card .author{color:var(--muted);font-size:13px}
 
 /* Active tab visual */
-.active-tab{background:rgba(0,229,255,0.08);border-radius:8px;padding:6px 10px;color:var(--accent);margin-left:8px}
+.active-tab{background:transparent;border-radius:8px;padding:6px 10px;color:var(--accent);margin-left:8px;text-decoration:none;font-weight:600}
+
+/* strong override to prevent browser default blue/underline on some states */
+.menu .menu-list a, .menu .menu-list a:link, .menu .menu-list a:visited, .menu .menu-list a:focus, .menu .menu-list a:hover, .menu .menu-list a:active{
+    color:var(--accent) !important;
+    text-decoration:none !important;
+}
+
+/* make buttons inside small menu look like the cyan links */
+.menu .menu-list button{
+    background:transparent;
+    border:0;
+    color:var(--accent);
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+}
+.menu .menu-list button:hover{background:rgba(0,229,255,0.06);transform:translateY(-2px)}
+/* anchor variant that looks exactly like the menu button */
+.menu .menu-list a.menu-btn,
+.menu .menu-list a.menu-btn:link,
+.menu .menu-list a.menu-btn:visited,
+.menu .menu-list a.menu-btn:hover,
+.menu .menu-list a.menu-btn:active{
+    color:var(--accent) !important;
+    text-decoration:none !important;
+    background:transparent;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    display:inline-block;
+}
+.menu .menu-list a.menu-btn:hover{background:rgba(0,229,255,0.06);transform:translateY(-2px)}
+
+/* global menu-btn rule so the link looks the same even outside .menu */
+a.menu-btn, a.menu-btn:link, a.menu-btn:visited, a.menu-btn:hover, a.menu-btn:active {
+    color: var(--accent) !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 38px !important;
+    line-height: 1 !important;
+}
+a.menu-btn:hover { background: rgba(0,229,255,0.06) !important; transform: translateY(-2px) !important; }
 
 @media (max-width:640px){
     .game-card .cover{height:120px}

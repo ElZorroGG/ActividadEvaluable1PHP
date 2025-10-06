@@ -103,7 +103,6 @@ if ($url !== "") {
     }
 }
 
-
 try {
     $sql = "INSERT INTO bibliotecajuegos (user_id, titulo, descripcion, autor, caratula, categoria, url, anio) VALUES (:user_id, :titulo, :descripcion, :autor, :caratula, :categoria, :url, :anio)";
     $stmt = $conn->prepare($sql);

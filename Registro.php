@@ -47,7 +47,7 @@ unset($_SESSION["Error"], $_SESSION["nombre"], $_SESSION["mail"], $_SESSION["con
 
       <div class="actions">
         <button type="submit">Validar</button>
-        <a class="button secondary" href="login.php">Volver</a>
+        <a class="menu-btn" href="login.php">Volver</a>
       </div>
     </form>
   </div>
