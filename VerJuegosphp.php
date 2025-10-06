@@ -11,7 +11,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
-<?php include 'menu.php'; ?>
+<?php include "menu.php"; ?>
 
 <div class="container">
   <div class="panel">
@@ -21,20 +21,20 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
         <div class="menu-inner" style="padding:8px">
           <div class="brand">Ver juegos</div>
           <div class="menu-list">
-            <a href="#" :class="{ 'active-tab': tab==='todos' }" @click.prevent="tab='todos'">Todos</a>
-            <a href="#" :class="{ 'active-tab': tab==='mios' }" @click.prevent="tab='mios'">Mis juegos</a>
+            <a href="#" :class='{"active-tab": tab==="todos"}' @click.prevent='tab="todos"'>Todos</a>
+            <a href="#" :class='{"active-tab": tab==="mios"}' @click.prevent='tab="mios"'>Mis juegos</a>
           </div>
         </div>
       </div>
 
       <div x-show="tab==='todos'">
         <div class="grid-games">
-          <?php foreach (($games['todos'] ?? []) as $j):
-            $img = htmlspecialchars($j['caratula'] ?: 'CaratulaPorDefecto/default.jpg');
-            $title = htmlspecialchars($j['titulo']);
-            $autor = htmlspecialchars($j['autor']);
+          <?php foreach (($games["todos"] ?? []) as $j):
+            $img = htmlspecialchars($j["caratula"] ?: "CaratulaPorDefecto/default.jpg");
+            $title = htmlspecialchars($j["titulo"]);
+            $autor = htmlspecialchars($j["autor"]);
           ?>
-          <a class="game-card" href="VerJuego.php?id=<?php echo (int)$j['id']; ?>">
+          <a class="game-card" href="VerJuego.php?id=<?php echo (int)$j["id"]; ?>">
             <img src="<?php echo $img; ?>" alt="<?php echo $title; ?>" class="cover" loading="lazy">
             <div class="meta">
               <div class="title"><?php echo $title; ?></div>
@@ -47,12 +47,12 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
       <div x-show="tab==='mios'" x-cloak>
         <div class="grid-games">
-          <?php foreach (($games['mios'] ?? []) as $j):
-            $img = htmlspecialchars($j['caratula'] ?: 'CaratulaPorDefecto/default.jpg');
-            $title = htmlspecialchars($j['titulo']);
-            $autor = htmlspecialchars($j['autor']);
+          <?php foreach (($games["mios"] ?? []) as $j):
+            $img = htmlspecialchars($j["caratula"] ?: "CaratulaPorDefecto/default.jpg");
+            $title = htmlspecialchars($j["titulo"]);
+            $autor = htmlspecialchars($j["autor"]);
           ?>
-          <a class="game-card" href="VerJuego.php?id=<?php echo (int)$j['id']; ?>">
+          <a class="game-card" href="VerJuego.php?id=<?php echo (int)$j["id"]; ?>">
             <img src="<?php echo $img; ?>" alt="<?php echo $title; ?>" class="cover" loading="lazy">
             <div class="meta">
               <div class="title"><?php echo $title; ?></div>

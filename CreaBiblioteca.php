@@ -5,8 +5,8 @@ if (!isset($_SESSION["Usuario"])){
     die;
 }
 
-$error = $_SESSION["ErrorAñadirJuego"] ?? '';
-$exito = $_SESSION["ExitoAñadirJuego"] ?? '';
+$error = $_SESSION["ErrorAñadirJuego"] ?? "";
+$exito = $_SESSION["ExitoAñadirJuego"] ?? "";
 
 unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"]);
 ?>
@@ -19,7 +19,7 @@ unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"]);
 </head>
 <body>
             <div class="container">
-                <?php include_once 'menu.php'; ?>
+                <?php include_once "menu.php"; ?>
                 <div class="panel">
                 <h1>Ingresa un juego a la biblioteca</h1>
 

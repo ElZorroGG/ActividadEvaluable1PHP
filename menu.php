@@ -3,7 +3,7 @@
 if (session_status() !== PHP_SESSION_ACTIVE) {
   session_start();
 }
-$logged = !empty($_SESSION['Usuario']);
+$logged = !empty($_SESSION["Usuario"]);
 ?>
 <nav class="menu" id="site-menu">
   <div class="menu-inner">
@@ -23,12 +23,12 @@ $logged = !empty($_SESSION['Usuario']);
 </nav>
 <script>
   (function(){
-    var btn = document.getElementById('menu-toggle');
-    var menu = document.getElementById('site-menu');
-    btn && btn.addEventListener('click', function(){
-      var expanded = this.getAttribute('aria-expanded') === 'true';
-      this.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      menu.classList.toggle('open');
+    var btn = document.getElementById("menu-toggle");
+    var menu = document.getElementById("site-menu");
+    btn && btn.addEventListener("click", function(){
+      var expanded = this.getAttribute("aria-expanded") === "true";
+      this.setAttribute("aria-expanded", expanded ? "false" : "true");
+      menu.classList.toggle("open");
     });
   })();
 </script>

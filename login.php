@@ -9,13 +9,13 @@
 <body>
 <?php
 session_start();
-$error = $_SESSION['ErrorLogin'] ?? '';
-$prefill = $_SESSION['nombre_login'] ?? $_SESSION['nombre'] ?? '';
-unset($_SESSION['ErrorLogin'], $_SESSION['nombre_login']);
+$error = $_SESSION["ErrorLogin"] ?? "";
+$prefill = $_SESSION["nombre_login"] ?? $_SESSION["nombre"] ?? "";
+unset($_SESSION["ErrorLogin"], $_SESSION["nombre_login"]);
 ?>
 
 <div class="container">
-  <?php include_once 'menu.php'; ?>
+  <?php include_once "menu.php"; ?>
   <div class="panel">
     <h1>Iniciar sesión</h1>
     <?php if ($error): ?>

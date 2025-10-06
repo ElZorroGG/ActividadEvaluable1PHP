@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['Usuario'])) {
-    header('Location: login.php');
+if (!isset($_SESSION["Usuario"])) {
+    header("Location: login.php");
     exit;
 }
 ?>
@@ -14,11 +14,11 @@ if (!isset($_SESSION['Usuario'])) {
     <meta name="viewport" content="width=device-width,initial-scale=1">
     </head>
 <body>
-<?php include 'menu.php'; ?>
+<?php include "menu.php"; ?>
 
 <div class="container">
     <div class="panel">
-        <h1>Bienvenido <?php echo htmlspecialchars($_SESSION['Usuario']); ?></h1>
+    <h1>Bienvenido <?php echo htmlspecialchars($_SESSION["Usuario"]); ?></h1>
         <p class="small">Desde aquí puedes crear un juego o ver la lista completa.</p>
         <div class="actions" style="margin-top:16px">
             <a class="button" href="CreaBiblioteca.php">Crear juego</a>

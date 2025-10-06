@@ -1,11 +1,11 @@
 <?php
 session_start();
-$error = $_SESSION['Error'] ?? '';
+$error = $_SESSION["Error"] ?? "";
 $prefill = [
-   'nombre' => $_SESSION['nombre'] ?? '',
-   'mail' => $_SESSION['mail'] ?? ''
+  "nombre" => $_SESSION["nombre"] ?? "",
+  "mail" => $_SESSION["mail"] ?? ""
 ];
-unset($_SESSION['Error'], $_SESSION['nombre'], $_SESSION['mail'], $_SESSION['contraseña']);
+unset($_SESSION["Error"], $_SESSION["nombre"], $_SESSION["mail"], $_SESSION["contraseña"]);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,7 +17,7 @@ unset($_SESSION['Error'], $_SESSION['nombre'], $_SESSION['mail'], $_SESSION['con
 </head>
 <body>
 <div class="container">
-  <?php include_once 'menu.php'; ?>
+  <?php include_once "menu.php"; ?>
   <div class="panel">
     <h1>Registro</h1>
     <?php if ($error): ?>
@@ -27,12 +27,12 @@ unset($_SESSION['Error'], $_SESSION['nombre'], $_SESSION['mail'], $_SESSION['con
     <form action="Formulario.php" method="post" id="Formulario">
       <div class="form-row">
         <label for="nombre">Su nombre</label>
-        <input name="nombre" id="nombre" type="text" value="<?php echo htmlspecialchars($prefill['nombre']); ?>" required>
+        <input name="nombre" id="nombre" type="text" value="<?php echo htmlspecialchars($prefill["nombre"]); ?>" required>
       </div>
 
       <div class="form-row">
         <label for="email">Su Mail</label>
-        <input name="email" id="email" type="email" value="<?php echo htmlspecialchars($prefill['mail']); ?>" required>
+        <input name="email" id="email" type="email" value="<?php echo htmlspecialchars($prefill["mail"]); ?>" required>
       </div>
 
       <div class="form-row">
