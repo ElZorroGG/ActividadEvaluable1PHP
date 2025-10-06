@@ -36,17 +36,16 @@ CREATE TABLE `bibliotecajuegos` (
   `caratula` varchar(255) DEFAULT NULL,
   `categoria` varchar(100) DEFAULT NULL,
   `url` varchar(2083) DEFAULT NULL,
-  `anio` smallint(6) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `anio` smallint(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `bibliotecajuegos`
 --
 
-INSERT INTO `bibliotecajuegos` (`id`, `user_id`, `titulo`, `descripcion`, `autor`, `caratula`, `categoria`, `url`, `anio`, `created_at`) VALUES
-(1, 1, 'Hola', 'Esto es un test', 'YO mismo', 'uploads/d734caaaf5d90b01.jpg', 'PIPIPI', 'https://uniteapi.dev/es/p/ElZorroGG?type=auto', 2010, '2025-10-03 13:23:57'),
-(2, 1, 'a', '', '', 'CaratulaPorDefecto/c0de9331000023ace9828643f2e46467.jpg', '', NULL, NULL, '2025-10-03 13:30:24');
+INSERT INTO `bibliotecajuegos` (`id`, `user_id`, `titulo`, `descripcion`, `autor`, `caratula`, `categoria`, `url`, `anio`) VALUES
+(1, 1, 'Hola', 'Esto es un test', 'YO mismo', 'uploads/d734caaaf5d90b01.jpg', 'PIPIPI', 'https://uniteapi.dev/es/p/ElZorroGG?type=auto', 2010),
+(2, 1, 'a', '', '', 'CaratulaPorDefecto/c0de9331000023ace9828643f2e46467.jpg', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -59,15 +58,15 @@ CREATE TABLE `users` (
   `Nombre` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `Nombre`, `password`, `mail`, `created_at`) VALUES
-(1, 'a', '$2y$10$5L1t8X3tAS7uxc9cLp7Td.tU8GRuyiHdIvAsagSj.F0ju7DfAke6a', 'adayguillem@gmail.com', '2025-10-03 13:13:48');
+INSERT INTO `users` (`id`, `Nombre`, `password`, `mail`) VALUES
+(1, 'a', '$2y$10$5L1t8X3tAS7uxc9cLp7Td.tU8GRuyiHdIvAsagSj.F0ju7DfAke6a', 'adayguillem@gmail.com');
 
 --
 -- Índices para tablas volcadas

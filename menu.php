@@ -7,7 +7,7 @@ $logged = !empty($_SESSION['Usuario']);
 ?>
 <nav class="menu" id="site-menu">
   <div class="menu-inner">
-    <div class="brand"><a href="Session.php">Mi Biblioteca</a></div>
+  <div class="brand"><a href="Session.php">Menú</a></div>
     <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
     <ul class="menu-list" id="menu-list">
       <?php if (!$logged): ?>
