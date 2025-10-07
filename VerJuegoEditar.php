@@ -3,6 +3,40 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 $error = $_SESSION["ErrorEditar"] ?? "";
 $success = $_SESSION["ExitoEditar"] ?? "";
 unset($_SESSION["ErrorEditar"], $_SESSION["ExitoEditar"]);
+
+if (!isset($game)) {
+  if (!isset($_SESSION["Usuario"])) {
+    header("Location: login.php");
+    exit;
+  }
+
+  $id = isset($_GET["id"]) ? (int)$_GET["id"] : 0;
+  if ($id <= 0) {
+    header("Location: VerJuegos.php");
+    exit;
+  }
+
+  require_once __DIR__ . DIRECTORY_SEPARATOR . "Conexion.php";
+  try {
+    $stmt = $conn->prepare("SELECT * FROM bibliotecajuegos WHERE id = :id LIMIT 1");
+    $stmt->execute([":id" => $id]);
+    $game = $stmt->fetch(PDO::FETCH_ASSOC);
+  } catch (Exception $e) {
+    $game = false;
+  }
+
+  if (!$game) {
+    header("Location: VerJuegos.php");
+    exit;
+  }
+
+  $ownerId = (int)($game["user_id"] ?? 0);
+  $currentUser = (int)($_SESSION["user_id"] ?? $_SESSION["id"] ?? 0);
+  if ($ownerId !== $currentUser) {
+    header("Location: VerJuegos.php");
+    exit;
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,7 +59,7 @@ unset($_SESSION["ErrorEditar"], $_SESSION["ExitoEditar"]);
       <div class="notice success"><?php echo htmlspecialchars($success); ?></div>
     <?php endif; ?>
 
-    <form action="VerJuegoEditar.php?id=<?php echo (int)$game["id"]; ?>" method="post" enctype="multipart/form-data">
+  <form action="VerJuegoEditarphp.php?id=<?php echo (int)$game["id"]; ?>" method="post" enctype="multipart/form-data">
       <div class="form-row">
         <label for="Titulo">Titulo</label>
         <input id="Titulo" name="Titulo" type="text" value="<?php echo htmlspecialchars($game["titulo"]); ?>" required>
@@ -63,7 +97,7 @@ unset($_SESSION["ErrorEditar"], $_SESSION["ExitoEditar"]);
 
       <div class="actions">
         <button type="submit">Guardar cambios</button>
-        <a class="button secondary" href="VerJuego.php?id=<?php echo (int)$game["id"]; ?>">Cancelar</a>
+  <a class="button secondary" href="VerJuego.php?id=<?php echo (int)$game["id"]; ?>">Cancelar</a>
       </div>
     </form>
   </div>

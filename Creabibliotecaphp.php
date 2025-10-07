@@ -20,9 +20,19 @@ $categoria = isset($_POST["Categoria"]) ? trim($_POST["Categoria"]) : "";
 $url = isset($_POST["Url"]) ? trim($_POST["Url"]) : "";
 $fecha = isset($_POST["Fecha"]) ? (int)$_POST["Fecha"] : null;
 
+$_SESSION['arrayVariablesBiblioteca'] = [
+    'Titulo' => $titulo,
+    'Descripcion' => $descripcion,
+    'Autor' => $autor,
+    'Categoria' => $categoria,
+    'Url' => $url,
+    'Fecha' => $fecha,
+];
+
 
 if ($titulo === "") {
     $_SESSION["ErrorAñadirJuego"] = "El título es obligatorio.";
+    if (isset($_SESSION['arrayVariablesBiblioteca']['Titulo'])) unset($_SESSION['arrayVariablesBiblioteca']['Titulo']);
     header("Location: CreaBiblioteca.php");
     exit;
 }
@@ -46,6 +56,7 @@ if (isset($_FILES["Portada"]) && $_FILES["Portada"]["error"] == UPLOAD_ERR_OK) {
 
     if ($size > 5 * 1024 * 1024) {
         $_SESSION["ErrorAñadirJuego"] = "La imagen es demasiado grande (max 5MB).";
+        if (isset($_SESSION['arrayVariablesBiblioteca']['Portada'])) unset($_SESSION['arrayVariablesBiblioteca']['Portada']);
         header("Location: CreaBiblioteca.php");
         exit;
     }
@@ -56,6 +67,7 @@ if (isset($_FILES["Portada"]) && $_FILES["Portada"]["error"] == UPLOAD_ERR_OK) {
     $permitidas = array("jpg", "jpeg", "png", "gif", "webp");
     if (!in_array($ext, $permitidas)) {
         $_SESSION["ErrorAñadirJuego"] = "Tipo de imagen no permitido. Usa JPG, PNG, GIF o WEBP.";
+        if (isset($_SESSION['arrayVariablesBiblioteca']['Portada'])) unset($_SESSION['arrayVariablesBiblioteca']['Portada']);
         header("Location: CreaBiblioteca.php");
         exit;
     }
@@ -78,6 +90,7 @@ if (isset($_FILES["Portada"]) && $_FILES["Portada"]["error"] == UPLOAD_ERR_OK) {
            $rutaPortada = "caratulas/" . $nuevoNombre; 
     } else {
         $_SESSION["ErrorAñadirJuego"] = "No se pudo guardar la imagen.";
+        if (isset($_SESSION['arrayVariablesBiblioteca']['Portada'])) unset($_SESSION['arrayVariablesBiblioteca']['Portada']);
         header("Location: CreaBiblioteca.php");
         exit;
     }
@@ -98,6 +111,7 @@ if ($url !== "") {
     $scheme = strtolower(parse_url($url, PHP_URL_SCHEME) ?? "");
     if (!$esValida || !in_array($scheme, ["http", "https"])) {
         $_SESSION["ErrorAñadirJuego"] = "La URL no tiene un formato válido. Usa http:// o https://";
+        if (isset($_SESSION['arrayVariablesBiblioteca']['Url'])) unset($_SESSION['arrayVariablesBiblioteca']['Url']);
         header("Location: CreaBiblioteca.php");
         exit;
     }
@@ -116,6 +130,7 @@ try {
     $stmt->bindValue(":anio", $fecha);
     $stmt->execute();
     $_SESSION["ExitoAñadirJuego"] = "Juego añadido correctamente.";
+    unset($_SESSION['arrayVariablesBiblioteca']);
 } catch (Exception $e) {
     $_SESSION["ErrorAñadirJuego"] = "Error al guardar el juego: " . $e->getMessage();
 }

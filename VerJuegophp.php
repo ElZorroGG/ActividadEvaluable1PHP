@@ -8,18 +8,19 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title><?php echo htmlspecialchars($game["titulo"]); ?></title>
   <link rel="stylesheet" href="Estilo.css">
+  <link rel="stylesheet" href="VerJuego.css">
 </head>
 <body>
 <?php include "menu.php"; ?>
 
 <div class="container">
   <div class="panel">
-    <div class="game-detail">
-      <div class="cover-large">
-        <img src="<?php echo htmlspecialchars($game["caratula"] ?: "CaratulaPorDefecto/default.jpg"); ?>" alt="<?php echo htmlspecialchars($game["titulo"]); ?>" style="width:100%;height:auto;border-radius:8px">
+    <div class="game-detail-vj">
+      <h1 class="title-vj"><?php echo htmlspecialchars($game["titulo"]); ?></h1>
+      <div class="cover-vj">
+        <img src="<?php echo htmlspecialchars($game["caratula"] ?: "CaratulaPorDefecto/default.jpg"); ?>" alt="<?php echo htmlspecialchars($game["titulo"]); ?>">
       </div>
-      <div class="details" style="margin-top:12px">
-        <h1><?php echo htmlspecialchars($game["titulo"]); ?></h1>
+      <div class="details-vj" style="margin-top:12px">
         <p class="small">Autor / Estudio: <?php echo htmlspecialchars($game["autor"]); ?></p>
         <p class="small">Categoría: <?php echo htmlspecialchars($game["categoria"]); ?></p>
         <p class="small">Año: <?php echo htmlspecialchars($game["anio"]); ?></p>
@@ -31,10 +32,10 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
       </div>
     </div>
 
-    <div style="margin-top:12px">
-      <a class="button" href="VerJuegos.php">Volver a la lista</a>
+    <div class="panel-footer-vj">
+      <a class="button menu-btn" href="VerJuegos.php">Volver a la lista</a>
       <?php if ((int)($game["user_id"] ?? 0) === (int)($_SESSION["user_id"] ?? $_SESSION["id"] ?? 0)): ?>
-        <a class="button" href="VerJuegoEditar.php?id=<?php echo (int)$game["id"]; ?>">Editar</a>
+        <a class="button menu-btn" href="VerJuegoEditar.php?id=<?php echo (int)$game["id"]; ?>">Editar</a>
       <?php endif; ?>
     </div>
   </div>
