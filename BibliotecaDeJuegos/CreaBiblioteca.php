@@ -75,7 +75,7 @@ unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"], $_SESSION[
 
                     <div class="form-row">
                         <label for="Fecha">Año de salida del Juego</label>
-                        <input id="Fecha" name="Fecha" type="number" min="1984" max="2030" value="<?php echo htmlspecialchars($old['Fecha'] ?? ''); ?>">
+                        <input id="Fecha" name="Fecha" type="number" min="1984" value="<?php echo htmlspecialchars($old['Fecha'] ?? ''); ?>">
                     </div>
 
                     <div class="form-row file-input">

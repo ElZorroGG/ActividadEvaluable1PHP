@@ -76,8 +76,25 @@ if (!isset($game)) {
       </div>
 
       <div class="form-row">
-        <label for="Categoria">Categoria</label>
-        <input id="Categoria" name="Categoria" type="text" value="<?php echo htmlspecialchars($game["categoria"]); ?>">
+        <div class="form-row">
+                        <label for="Categoria">Categoria del juego:</label>
+                        <select id="Categoria" name="Categoria" value="<?php echo htmlspecialchars($game["categoria"]); ?>" >
+                            <option value="Accion" <?php echo (isset($old['Categoria']) && $old['Categoria']=='Accion') ? 'selected' : '';?>>Acción</option>
+                            <option value="Aventura" <?php echo (isset($old['Categoria']) && $old['Categoria']=='Aventura') ? 'selected' : '';?>>Aventura</option>
+                            <option value="RPG" <?php echo (isset($old['Categoria']) && $old['Categoria']=='RPG') ? 'selected' : '';?>>RPG / Rol</option>
+                            <option value="Estrategia" <?php echo (isset($old['Categoria']) && $old['Categoria']=='Estrategia') ? 'selected' : '';?>>Estrategia (RTS/TBS)</option>
+                            <option value="Shooter" <?php echo (isset($old['Categoria']) && $old['Categoria']=='Shooter') ? 'selected' : '';?>>Shooter / FPS</option>
+                            <option value="Simulacion" <?php echo (isset($old['Categoria']) && $old['Categoria']=='Simulacion') ? 'selected' : '';?>>Simulación</option>
+                            <option value="Deportes" <?php echo (isset($old['Categoria']) && $old['Categoria']=='Deportes') ? 'selected' : '';?>>Deportes</option>
+                            <option value="Carreras" <?php echo (isset($old['Categoria']) && $old['Categoria']=='Carreras') ? 'selected' : '';?>>Carreras</option>
+                            <option value="Puzzle" <?php echo (isset($old['Categoria']) && $old['Categoria']=='Puzzle') ? 'selected' : '';?>>Puzzle / Rompecabezas</option>
+                            <option value="Indie" <?php echo (isset($old['Categoria']) && $old['Categoria']=='Indie') ? 'selected' : '';?>>Indie</option>
+                            <option value="MMO" <?php echo (isset($old['Categoria']) && $old['Categoria']=='MMO') ? 'selected' : '';?>>MMO / Multijugador masivo</option>
+                            <option value="Sandbox" <?php echo (isset($old['Categoria']) && $old['Categoria']=='Sandbox') ? 'selected' : '';?>>Sandbox / Mundo abierto</option>
+                            <option value="Horror" <?php echo (isset($old['Categoria']) && $old['Categoria']=='Horror') ? 'selected' : '';?>>Horror / Survival</option>
+                            <option value="EstrategiaTactica" <?php echo (isset($old['Categoria']) && $old['Categoria']=='EstrategiaTactica') ? 'selected' : '';?>>Táctico / Estrategia por turnos</option>
+                        </select>
+                    </div>
       </div>
 
       <div class="form-row">
@@ -87,7 +104,7 @@ if (!isset($game)) {
 
       <div class="form-row">
         <label for="Fecha">Año</label>
-        <input id="Fecha" name="Fecha" type="number" value="<?php echo htmlspecialchars($game["anio"]); ?>">
+        <input id="Fecha" name="Fecha" min="1984" type="number" value="<?php echo htmlspecialchars($game["anio"]); ?>">
       </div>
 
       <div class="form-row file-input">
