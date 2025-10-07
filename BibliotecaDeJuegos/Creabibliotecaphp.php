@@ -1,12 +1,12 @@
 <?php
 
-session_start();
-require("Conexion.php");
+if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+require(__DIR__ . '/../Conexion.php');
 
 
 if (empty($_SESSION["Usuario"]) || (empty($_SESSION["user_id"]) && empty($_SESSION["id"]))) {
     $_SESSION["ErrorAñadirJuego"] = "Debes iniciar sesión para añadir un juego.";
-    header("Location: login.php");
+    header("Location: /ActividadEvaluable1PHP/login.php");
     exit;
 }
 
@@ -33,18 +33,18 @@ $_SESSION['arrayVariablesBiblioteca'] = [
 if ($titulo === "") {
     $_SESSION["ErrorAñadirJuego"] = "El título es obligatorio.";
     if (isset($_SESSION['arrayVariablesBiblioteca']['Titulo'])) unset($_SESSION['arrayVariablesBiblioteca']['Titulo']);
-    header("Location: CreaBiblioteca.php");
+    header("Location: /ActividadEvaluable1PHP/BibliotecaDeJuegos/CreaBiblioteca.php");
     exit;
 }
 
 
 $rutaPortada = null;
-$carpetaSubidas = __DIR__ . DIRECTORY_SEPARATOR . "caratulas";
+$carpetaSubidas = __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "caratulas";
 if (!is_dir($carpetaSubidas)) {
     mkdir($carpetaSubidas, 0755);
 }
 
-$carpetaDefecto = __DIR__ . DIRECTORY_SEPARATOR . "CaratulaPorDefecto";
+$carpetaDefecto = __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "CaratulaPorDefecto";
 if (!is_dir($carpetaDefecto)) {
     mkdir($carpetaDefecto, 0755);
 }
@@ -57,7 +57,7 @@ if (isset($_FILES["Portada"]) && $_FILES["Portada"]["error"] == UPLOAD_ERR_OK) {
     if ($size > 5 * 1024 * 1024) {
         $_SESSION["ErrorAñadirJuego"] = "La imagen es demasiado grande (max 5MB).";
         if (isset($_SESSION['arrayVariablesBiblioteca']['Portada'])) unset($_SESSION['arrayVariablesBiblioteca']['Portada']);
-        header("Location: CreaBiblioteca.php");
+        header("Location: /ActividadEvaluable1PHP/BibliotecaDeJuegos/CreaBiblioteca.php");
         exit;
     }
 
@@ -68,7 +68,7 @@ if (isset($_FILES["Portada"]) && $_FILES["Portada"]["error"] == UPLOAD_ERR_OK) {
     if (!in_array($ext, $permitidas)) {
         $_SESSION["ErrorAñadirJuego"] = "Tipo de imagen no permitido. Usa JPG, PNG, GIF o WEBP.";
         if (isset($_SESSION['arrayVariablesBiblioteca']['Portada'])) unset($_SESSION['arrayVariablesBiblioteca']['Portada']);
-        header("Location: CreaBiblioteca.php");
+        header("Location: /ActividadEvaluable1PHP/BibliotecaDeJuegos/CreaBiblioteca.php");
         exit;
     }
 
@@ -87,11 +87,11 @@ if (isset($_FILES["Portada"]) && $_FILES["Portada"]["error"] == UPLOAD_ERR_OK) {
     }
 
     if (move_uploaded_file($temporal, $destino)) {
-           $rutaPortada = "caratulas/" . $nuevoNombre; 
+           $rutaPortada = '/ActividadEvaluable1PHP/caratulas/' . $nuevoNombre; 
     } else {
         $_SESSION["ErrorAñadirJuego"] = "No se pudo guardar la imagen.";
         if (isset($_SESSION['arrayVariablesBiblioteca']['Portada'])) unset($_SESSION['arrayVariablesBiblioteca']['Portada']);
-        header("Location: CreaBiblioteca.php");
+        header("Location: /ActividadEvaluable1PHP/BibliotecaDeJuegos/CreaBiblioteca.php");
         exit;
     }
 }
@@ -100,7 +100,7 @@ if ($rutaPortada === null) {
     $archivosDef = glob($carpetaDefecto . DIRECTORY_SEPARATOR . "*.{jpg,jpeg,png,gif,webp}", GLOB_BRACE);
     if (!empty($archivosDef)) {
         $nombreDef = basename($archivosDef[0]);
-        $rutaPortada = "CaratulaPorDefecto/" . $nombreDef;
+        $rutaPortada = '/ActividadEvaluable1PHP/CaratulaPorDefecto/' . $nombreDef;
     } else {
         $rutaPortada = null;
     }
@@ -112,7 +112,7 @@ if ($url !== "") {
     if (!$esValida || !in_array($scheme, ["http", "https"])) {
         $_SESSION["ErrorAñadirJuego"] = "La URL no tiene un formato válido. Usa http:// o https://";
         if (isset($_SESSION['arrayVariablesBiblioteca']['Url'])) unset($_SESSION['arrayVariablesBiblioteca']['Url']);
-        header("Location: CreaBiblioteca.php");
+        header("Location: /ActividadEvaluable1PHP/BibliotecaDeJuegos/CreaBiblioteca.php");
         exit;
     }
 }
@@ -131,9 +131,11 @@ try {
     $stmt->execute();
     $_SESSION["ExitoAñadirJuego"] = "Juego añadido correctamente.";
     unset($_SESSION['arrayVariablesBiblioteca']);
+    header("Location: /ActividadEvaluable1PHP/BibliotecaDeJuegos/CreaBiblioteca.php");
+    exit;
 } catch (Exception $e) {
     $_SESSION["ErrorAñadirJuego"] = "Error al guardar el juego: " . $e->getMessage();
 }
 
-header("Location: CreaBiblioteca.php");
+header("Location: /ActividadEvaluable1PHP/BibliotecaDeJuegos/CreaBiblioteca.php");
 exit;

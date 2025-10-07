@@ -7,11 +7,11 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Ver Juegos</title>
-  <link rel="stylesheet" href="Estilo.css">
+  <link rel="stylesheet" href="/ActividadEvaluable1PHP/Estilo.css">
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
-<?php include "menu.php"; ?>
+<?php include __DIR__ . '/../menu.php'; ?>
 
 <div class="container">
   <div class="panel">
@@ -29,12 +29,15 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
       <div x-show="tab==='todos'">
         <div class="grid-games">
           <?php foreach (($games["todos"] ?? []) as $j):
-            $img = htmlspecialchars($j["caratula"] ?: "CaratulaPorDefecto/default.jpg");
+            $img = $j["caratula"] ?: "CaratulaPorDefecto/default.jpg";
+            if (!preg_match('#^(https?:)?//#', $img) && strpos($img, '/') !== 0) {
+                $img = '/ActividadEvaluable1PHP/' . ltrim($img, '/\\');
+            }
             $title = htmlspecialchars($j["titulo"]);
             $autor = htmlspecialchars($j["autor"]);
           ?>
           <?php $bg = htmlspecialchars($img); ?>
-          <a class="game-card" href="VerJuego.php?id=<?php echo (int)$j["id"]; ?>" style="--bg-url: url('<?php echo $bg; ?>');">
+          <a class="game-card" href="/ActividadEvaluable1PHP/BibliotecaDeJuegos/VerJuego.php?id=<?php echo (int)$j["id"]; ?>" style="--bg-url: url('<?php echo $bg; ?>');">
             <div class="meta-overlay">
               <div class="meta">
                 <div class="title"><?php echo $title; ?></div>
@@ -49,12 +52,15 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
       <div x-show="tab==='mios'" x-cloak>
         <div class="grid-games">
           <?php foreach (($games["mios"] ?? []) as $j):
-            $img = htmlspecialchars($j["caratula"] ?: "CaratulaPorDefecto/default.jpg");
+            $img = $j["caratula"] ?: "CaratulaPorDefecto/default.jpg";
+            if (!preg_match('#^(https?:)?//#', $img) && strpos($img, '/') !== 0) {
+                $img = '/ActividadEvaluable1PHP/' . ltrim($img, '/\\');
+            }
             $title = htmlspecialchars($j["titulo"]);
             $autor = htmlspecialchars($j["autor"]);
           ?>
           <?php $bg = htmlspecialchars($img); ?>
-          <a class="game-card" href="VerJuego.php?id=<?php echo (int)$j["id"]; ?>" style="--bg-url: url('<?php echo $bg; ?>');">
+          <a class="game-card" href="/ActividadEvaluable1PHP/BibliotecaDeJuegos/VerJuego.php?id=<?php echo (int)$j["id"]; ?>" style="--bg-url: url('<?php echo $bg; ?>');">
             <div class="meta-overlay">
               <div class="meta">
                 <div class="title"><?php echo $title; ?></div>

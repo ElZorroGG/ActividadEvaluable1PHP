@@ -1,7 +1,7 @@
 <?php
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 if (!isset($_SESSION["Usuario"])){
-    header("location: login.php");
+    header("Location: /ActividadEvaluable1PHP/login.php");
     die;
 }
 
@@ -16,11 +16,11 @@ unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"], $_SESSION[
 <head>
     <meta charset="utf-8">
     <title>Ingresar Juego</title>
-    <link rel="stylesheet" href="Estilo.css">
+    <link rel="stylesheet" href="/ActividadEvaluable1PHP/Estilo.css">
 </head>
 <body>
             <div class="container">
-                <?php include_once "menu.php"; ?>
+                <?php include_once __DIR__ . '/../menu.php'; ?>
                 <div class="panel">
                 <h1>Ingresa un juego a la biblioteca</h1>
 
@@ -31,7 +31,7 @@ unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"], $_SESSION[
                     <div class="notice success"><?php echo htmlspecialchars($exito); ?></div>
                 <?php endif; ?>
 
-                <form action="Creabibliotecaphp.php" method="post" enctype="multipart/form-data">
+                <form action="/ActividadEvaluable1PHP/BibliotecaDeJuegos/Creabibliotecaphp.php" method="post" enctype="multipart/form-data">
 
                     <div class="form-row">
                         <label for="NombreJuego">Nombre del Juego:</label>
@@ -92,7 +92,7 @@ unset($_SESSION["ErrorAñadirJuego"], $_SESSION["ExitoAñadirJuego"], $_SESSION[
 
                     <div class="actions">
                         <button type="submit">Guardar juego</button>
-                        <a class="button menu-btn" href="Session.php">Volver</a>
+                        <a class="button menu-btn" href="/ActividadEvaluable1PHP/Session.php">Volver</a>
                     </div>
 
                 </form>

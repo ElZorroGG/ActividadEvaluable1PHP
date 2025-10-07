@@ -1,5 +1,5 @@
 <?php
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 $error = $_SESSION["Error"] ?? "";
 $prefill = [
   "nombre" => $_SESSION["nombre"] ?? "",
@@ -12,19 +12,19 @@ unset($_SESSION["Error"], $_SESSION["nombre"], $_SESSION["mail"], $_SESSION["con
 <head>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width,initial-scale=1">
-   <link rel="stylesheet" href="Estilo.css">
+   <link rel="stylesheet" href="/ActividadEvaluable1PHP/Estilo.css">
    <title>Registro</title>
 </head>
 <body>
 <div class="container">
-  <?php include_once "menu.php"; ?>
+  <?php include_once __DIR__ . '/../menu.php'; ?>
   <div class="panel">
     <h1>Registro</h1>
     <?php if ($error): ?>
       <div class="notice error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
 
-    <form action="Formulario.php" method="post" id="Formulario">
+  <form action="/ActividadEvaluable1PHP/DatosUsuario/Formulario.php" method="post" id="Formulario">
       <div class="form-row">
         <label for="nombre">Su nombre</label>
         <input name="nombre" id="nombre" type="text" value="<?php echo htmlspecialchars($prefill["nombre"]); ?>" required>
@@ -47,7 +47,7 @@ unset($_SESSION["Error"], $_SESSION["nombre"], $_SESSION["mail"], $_SESSION["con
 
       <div class="actions">
         <button type="submit">Validar</button>
-        <a class="menu-btn" href="login.php">Volver</a>
+  <a class="menu-btn" href="/ActividadEvaluable1PHP/DatosUsuario/login.php">Volver</a>
       </div>
     </form>
   </div>

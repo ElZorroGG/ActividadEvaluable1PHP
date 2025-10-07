@@ -1,6 +1,6 @@
 <?php
-session_start();
-require("Conexion.php");
+if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+require __DIR__ . '/../Conexion.php';
 
 $error = "";
 $nombre = trim($_POST["nombre"] ?? "");
@@ -22,7 +22,7 @@ if ($error !== "") {
     $_SESSION["Error"] = $error;
     $_SESSION["nombre"] = $nombre;
     $_SESSION["mail"] = $email;
-    header("Location: Registro.php");
+        header("Location: /ActividadEvaluable1PHP/DatosUsuario/Registro.php");
     exit;
 }
 
@@ -34,16 +34,16 @@ try {
     $stmt->bindValue(":mail", $email);
     $stmt->execute();
 
-    // autenticar al usuario recién creado
     $_SESSION["Log"] = $email;
     $_SESSION["Usuario"] = $nombre;
     $_SESSION["user_id"] = $conn->lastInsertId();
-    header("Location: Session.php");
+    header("Location: /ActividadEvaluable1PHP/Session.php");
     exit;
 } catch (PDOException $e) {
     $_SESSION["Error"] = "Error al crear usuario: " . $e->getMessage();
     $_SESSION["nombre"] = $nombre;
     $_SESSION["mail"] = $email;
-    header("Location: Registro.php");
+        header("Location: /ActividadEvaluable1PHP/DatosUsuario/Registro.php");
     exit;
 }
+    

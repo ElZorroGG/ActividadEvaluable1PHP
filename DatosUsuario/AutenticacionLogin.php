@@ -1,6 +1,6 @@
 <?php
-session_start();
-require("Conexion.php");
+if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+require __DIR__ . '/../Conexion.php';
 
 $passwordInput = null;
 if (isset($_POST["contrasena"])) {
@@ -11,7 +11,7 @@ if (isset($_POST["contrasena"])) {
 
 if (!isset($_POST["nombre"]) || $passwordInput === null) {
     $_SESSION["ErrorLogin"] = "Introduce nombre y contraseña.";
-    header("Location: login.php");
+    header("Location: /ActividadEvaluable1PHP/DatosUsuario/login.php");
     exit;
 }
 
@@ -29,21 +29,20 @@ try {
         $_SESSION["Log"] = $user["mail"];
         $_SESSION["Usuario"] = $user["Nombre"];
         $_SESSION["user_id"] = $user["id"];
-        header("Location: Session.php");
+    header("Location: /ActividadEvaluable1PHP/Session.php");
         exit;
     } else {
         $_SESSION["ErrorLogin"] = "Nombre o contraseña incorrectos.";
         $_SESSION["nombre_login"] = $nombre;
-        header("Location: login.php");
+        header("Location: /ActividadEvaluable1PHP/DatosUsuario/login.php");
         exit;
     }
 } catch (PDOException $e) {
 
     $_SESSION["ErrorLogin"] = "Error de conexión: " . $e->getMessage();
-    header("Location: login.php");
+    header("Location: /ActividadEvaluable1PHP/DatosUsuario/login.php");
     exit;
 }
 
 
 ?>
-p´ñ
