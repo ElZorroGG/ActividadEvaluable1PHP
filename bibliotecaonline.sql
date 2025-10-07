@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-10-2025 a las 15:40:18
+-- Tiempo de generación: 07-10-2025 a las 14:23:27
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -36,16 +36,17 @@ CREATE TABLE `bibliotecajuegos` (
   `caratula` varchar(255) DEFAULT NULL,
   `categoria` varchar(100) DEFAULT NULL,
   `url` varchar(2083) DEFAULT NULL,
-  `anio` smallint(6) DEFAULT NULL
+  `anio` smallint(6) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `bibliotecajuegos`
 --
 
-INSERT INTO `bibliotecajuegos` (`id`, `user_id`, `titulo`, `descripcion`, `autor`, `caratula`, `categoria`, `url`, `anio`) VALUES
-(1, 1, 'Hola', 'Esto es un test', 'YO mismo', 'uploads/d734caaaf5d90b01.jpg', 'PIPIPI', 'https://uniteapi.dev/es/p/ElZorroGG?type=auto', 2010),
-(2, 1, 'a', '', '', 'CaratulaPorDefecto/c0de9331000023ace9828643f2e46467.jpg', '', NULL, NULL);
+INSERT INTO `bibliotecajuegos` (`id`, `user_id`, `titulo`, `descripcion`, `autor`, `caratula`, `categoria`, `url`, `anio`, `created_at`) VALUES
+(12, 4, 'GTA 5', 'Esto es gta5 baybe', 'Rockstar Studios', '/ActividadEvaluable1PHP/CaratulaPorDefecto/fc10656866244f57fe4aec109c76c84474539fef6ef3e066cf177edea6185202_749a89.png', 'Accion', 'https://www.rockstargames.com/es/gta-v?info=order', 2013, '2025-10-07 11:49:21'),
+(13, 3, 'Counter Strike global Offensive', 'Csgo terroristas y antiterroristas', 'Valve', '/ActividadEvaluable1PHP/caratulas/e82739cb29b3832e4d566ab337abb0f1fe3e18db3b0339361739dadc13b431ac.webp', 'Accion', 'https://www.counter-strike.net', 2012, '2025-10-07 11:54:46');
 
 -- --------------------------------------------------------
 
@@ -58,15 +59,16 @@ CREATE TABLE `users` (
   `Nombre` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL,
-  
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `Nombre`, `password`, `mail`) VALUES
-(1, 'a', '$2y$10$5L1t8X3tAS7uxc9cLp7Td.tU8GRuyiHdIvAsagSj.F0ju7DfAke6a', 'adayguillem@gmail.com');
+INSERT INTO `users` (`id`, `Nombre`, `password`, `mail`, `created_at`) VALUES
+(3, 'Paco', '$2y$10$Vxc/Mu7zpZujEvBrU6p.u.JYKBH71J.9Dop2tM/I2suR9OCOVVvX6', 'Paco@gmail.com', '2025-10-07 11:44:53'),
+(4, 'Jimenez', '$2y$10$EQ0F4s6oqI8CSfRcyVRVw.L.QDFB8R07RiETEZuM5hx7Nx53on1jO', 'Jimenez@gmail.com', '2025-10-07 11:46:26');
 
 --
 -- Índices para tablas volcadas
@@ -94,13 +96,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `bibliotecajuegos`
 --
 ALTER TABLE `bibliotecajuegos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
