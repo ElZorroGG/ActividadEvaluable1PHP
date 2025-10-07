@@ -95,10 +95,10 @@ if (!isset($game)) {
         <input id="Portada" name="Portada" type="file" accept="image/*">
       </div>
 
-      <div class="actions">
-        <button type="submit">Guardar cambios</button>
-  <a class="button secondary" href="/ActividadEvaluable1PHP/BibliotecaDeJuegos/VerJuego.php?id=<?php echo (int)$game["id"]; ?>">Cancelar</a>
-      </div>
+  <div class="actions">
+    <button type="submit">Guardar cambios</button>
+  <a class="menu-btn" href="/ActividadEvaluable1PHP/BibliotecaDeJuegos/VerJuego.php?id=<?php echo (int)$game["id"]; ?>">Cancelar</a>
+  </div>
     </form>
   </div>
 </div>

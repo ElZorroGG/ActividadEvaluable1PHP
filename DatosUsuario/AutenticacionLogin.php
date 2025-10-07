@@ -1,23 +1,23 @@
 <?php
+//Codigo php del login
+//Si la sesion no esta iniciada la inicia
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 require __DIR__ . '/../Conexion.php';
 
 $passwordInput = null;
 if (isset($_POST["contrasena"])) {
     $passwordInput = $_POST["contrasena"];
-} elseif (isset($_POST["contraseña"])) {
-    $passwordInput = $_POST["contraseña"];
-}
-
+};
+//Comprueba que la contraseña este introducida
 if (!isset($_POST["nombre"]) || $passwordInput === null) {
     $_SESSION["ErrorLogin"] = "Introduce nombre y contraseña.";
     header("Location: /ActividadEvaluable1PHP/DatosUsuario/login.php");
     exit;
 }
-
+//Elimina los espacion en blanco del nombre por si acaso tiene 2
 $nombre = trim($_POST["nombre"]);
 $contrasena = $passwordInput;
-
+//Conexion para verificar le login y si funciona entras y si no a casa con error
 try {
     $stmt = $conn->prepare("SELECT id, Nombre, password, mail FROM users WHERE Nombre = :nombre LIMIT 1");
     $stmt->bindParam(":nombre", $nombre);

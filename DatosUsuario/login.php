@@ -45,7 +45,7 @@ unset($_SESSION["ErrorLogin"], $_SESSION["nombre_login"]);
         </div>
       </div>
 
-  <div style="text-align:center;margin-top:8px;color:var(--muted)">o también puedes <a class="menu-btn" href="/ActividadEvaluable1PHP/Registro.php">registrarte</a></div>
+  <div style="text-align:center;margin-top:8px;color:var(--muted)">o también puedes <a class="menu-btn" href="/ActividadEvaluable1PHP/DatosUsuario/Registro.php">registrarte</a></div>
     </form>
   </div>
 </div>
