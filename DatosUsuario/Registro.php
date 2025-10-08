@@ -13,22 +13,19 @@ unset($_SESSION["Error"], $_SESSION["nombre"], $_SESSION["mail"], $_SESSION["con
 <head>
   <script>
     function showHint(str) {
-      if (str.length == 0) {
-    document.getElementById("Sugerencia").innerHTML = "";
-    return;
-  } else {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("Sugerencia").innerHTML = this.responseText;
+      document.getElementById("Sugerencia").innerHTML = this.responseText;
       }
     };
     xmlhttp.open("GET", "VerificacionContraseña.php?q=" + str, true);
     xmlhttp.send();
-  }
 }
-document.addEventListener('DOMContentLoaded',function (){
-  showHint(str)});
+document.addEventListener('DOMContentLoaded', function () {
+      var passwordInput = document.getElementById('contraseña');
+      showHint(passwordInput ? passwordInput.value : "");
+    });
     
   </script>
    <meta charset="utf-8">
