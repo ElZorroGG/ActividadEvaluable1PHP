@@ -7,9 +7,30 @@ $prefill = [
 ];
 unset($_SESSION["Error"], $_SESSION["nombre"], $_SESSION["mail"], $_SESSION["contraseña"]);
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <script>
+    function showHint(str) {
+      if (str.length == 0) {
+    document.getElementById("Sugerencia").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("Sugerencia").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET", "VerificacionContraseña.php?q=" + str, true);
+    xmlhttp.send();
+  }
+}
+document.addEventListener('DOMContentLoaded',function (){
+  showHint(str)});
+    
+  </script>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width,initial-scale=1">
    <link rel="stylesheet" href="/ActividadEvaluable1PHP/Estilo.css">
@@ -37,13 +58,14 @@ unset($_SESSION["Error"], $_SESSION["nombre"], $_SESSION["mail"], $_SESSION["con
 
       <div class="form-row">
         <label for="contraseña">Su contraseña</label>
-        <input name="contraseña" id="contraseña" type="password" required>
+        <input name="contraseña" id="contraseña" required onkeyup="showHint(this.value)" type="password" required>
       </div>
 
       <div class="form-row">
         <label for="CorfirmaContraseña">Confirmar contraseña</label>
-        <input name="CorfirmaContraseña" id="CorfirmaContraseña" type="password" required>
+        <input name="CorfirmaContraseña" id="CorfirmaContraseña" type="password">
       </div>
+      <p id="Sugerencia"><span id="txtHint"></span></p>
 
       <div class="actions">
         <button type="submit">Validar</button>
