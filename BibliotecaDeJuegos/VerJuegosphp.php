@@ -12,7 +12,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 </head>
 <body>
 <?php include __DIR__ . '/../menu.php'; ?>
-
 <div class="container">
   <div class="panel">
     <h1>Juegos</h1>
