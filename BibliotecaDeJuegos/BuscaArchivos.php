@@ -7,7 +7,7 @@ if (!isset($_SESSION["Usuario"])) {
 require(__DIR__ . '/../Conexion.php');
 $q=$_GET["q"];
 try {
-    $stmtAll = $conn->prepare("SELECT * FROM bibliotecajuegos WHERE titulo like :nombre'%' ORDER BY id DESC");
+    $stmtAll = $conn->prepare("SELECT * FROM bibliotecajuegos WHERE titulo LIKE CONCAT(:nombre, '%') ORDER BY id DESC");
     $stmtAll->execute([":nombre" => $q]);
     $games = $stmtAll->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
