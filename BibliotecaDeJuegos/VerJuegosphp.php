@@ -15,6 +15,9 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 <div class="container">
   <div class="panel">
     <h1>Juegos</h1>
+    <form style="margin-bottom: 20px; margin-top: 12px;">
+        <input type="text" id="searchInput" size="30" placeholder="Buscar juegos..." style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" value="<?php echo htmlspecialchars($busqueda ?? ''); ?>">
+    </form>
     <div x-data="{tab: 'todos'}" style="margin-top:12px">
       <div class="menu" style="margin-bottom:8px;">
           <div class="menu-inner" style="padding:8px">
@@ -28,14 +31,14 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
       <div x-show="tab==='todos'">
         <div class="grid-games">
           <?php foreach (($games["todos"] ?? []) as $j):
-            $img = $j["caratula"] ?: "CaratulaPorDefecto/default.jpg";
+            $img = $j["caratula"] ?: "/ActividadEvaluable1PHP/CaratulaPorDefecto/fc10656866244f57fe4aec109c76c84474539fef6ef3e066cf177edea6185202_749a89.png";
             if (!preg_match('#^(https?:)?//#', $img) && strpos($img, '/') !== 0) {
                 $img = '/ActividadEvaluable1PHP/' . ltrim($img, '/\\');
             }
-            $title = htmlspecialchars($j["titulo"]);
-            $autor = htmlspecialchars($j["autor"]);
+            $title = $j["titulo"] ?? '';
+            $autor = $j["autor"] ?? '';
+            $bg = $img;
           ?>
-          <?php $bg = htmlspecialchars($img); ?>
           <a class="game-card" href="/ActividadEvaluable1PHP/BibliotecaDeJuegos/VerJuego.php?id=<?php echo (int)$j["id"]; ?>" style="--bg-url: url('<?php echo $bg; ?>');">
             <div class="meta-overlay">
               <div class="meta">
@@ -51,14 +54,14 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
       <div x-show="tab==='mios'" x-cloak>
         <div class="grid-games">
           <?php foreach (($games["mios"] ?? []) as $j):
-            $img = $j["caratula"] ?: "CaratulaPorDefecto/default.jpg";
+            $img = $j["caratula"] ?: "/ActividadEvaluable1PHP/CaratulaPorDefecto/fc10656866244f57fe4aec109c76c84474539fef6ef3e066cf177edea6185202_749a89.png";
             if (!preg_match('#^(https?:)?//#', $img) && strpos($img, '/') !== 0) {
                 $img = '/ActividadEvaluable1PHP/' . ltrim($img, '/\\');
             }
-            $title = htmlspecialchars($j["titulo"]);
-            $autor = htmlspecialchars($j["autor"]);
+            $title = $j["titulo"] ?? '';
+            $autor = $j["autor"] ?? '';
+            $bg = $img;
           ?>
-          <?php $bg = htmlspecialchars($img); ?>
           <a class="game-card" href="/ActividadEvaluable1PHP/BibliotecaDeJuegos/VerJuego.php?id=<?php echo (int)$j["id"]; ?>" style="--bg-url: url('<?php echo $bg; ?>');">
             <div class="meta-overlay">
               <div class="meta">
@@ -74,6 +77,17 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
     </div>
   </div>
 </div>
+
+<script>
+let searchTimeout;
+document.getElementById('searchInput').addEventListener('input', function(e) {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(function() {
+        const query = e.target.value;
+        window.location.href = '/ActividadEvaluable1PHP/BibliotecaDeJuegos/VerJuegos.php' + (query ? '?q=' + encodeURIComponent(query) : '');
+    }, 500);
+});
+</script>
 
 </body>
 </html>

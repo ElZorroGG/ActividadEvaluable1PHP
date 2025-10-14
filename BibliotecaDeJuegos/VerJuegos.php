@@ -7,17 +7,28 @@ if (!isset($_SESSION["Usuario"])) {
 require_once __DIR__ . '/../Conexion.php';
 
 $userId = (int)($_SESSION["user_id"] ?? 0);
+$busqueda = $_GET["q"] ?? "";
 
 try {
-    $stmtAll = $conn->query("SELECT * FROM bibliotecajuegos ORDER BY id DESC");
+    if (!empty($busqueda)) {
+        $stmtAll = $conn->prepare("SELECT * FROM bibliotecajuegos WHERE titulo LIKE CONCAT(:nombre, '%') ORDER BY id DESC");
+        $stmtAll->execute([":nombre" => $busqueda]);
+    } else {
+        $stmtAll = $conn->query("SELECT * FROM bibliotecajuegos ORDER BY id DESC");
+    }
     $todos = $stmtAll->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     $todos = [];
 }
 
 try {
-    $stmtMine = $conn->prepare("SELECT * FROM bibliotecajuegos WHERE user_id = :uid ORDER BY id DESC");
-    $stmtMine->execute([":uid" => $userId]);
+    if (!empty($busqueda)) {
+        $stmtMine = $conn->prepare("SELECT * FROM bibliotecajuegos WHERE user_id = :uid AND titulo LIKE CONCAT(:nombre, '%') ORDER BY id DESC");
+        $stmtMine->execute([":uid" => $userId, ":nombre" => $busqueda]);
+    } else {
+        $stmtMine = $conn->prepare("SELECT * FROM bibliotecajuegos WHERE user_id = :uid ORDER BY id DESC");
+        $stmtMine->execute([":uid" => $userId]);
+    }
     $mios = $stmtMine->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     $mios = [];
