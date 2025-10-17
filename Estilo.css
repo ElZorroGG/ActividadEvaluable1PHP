@@ -76,7 +76,7 @@ button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);
 
 .notice{padding:10px 12px;border-radius:8px;margin-bottom:12px}
 .error{background:linear-gradient(90deg,var(--danger), #ff7a8b);color:#fff}
-.success{background:linear-gradient(90deg,var(--accent-2), #a6ff9b);color:#022}
+.success{background:linear-gradient(90deg,var(--accent-2), #a6ff9b);color:#022;font-weight:600}
 
 .small{font-size:12px;color:var(--muted)}
 
@@ -185,6 +185,18 @@ nav#site-menu .menu-list .user-profile {
     margin-left: 8px;
     display: flex;
     align-items: center;
+}
+
+nav#site-menu .menu-list .user-profile a {
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    display: inline-block;
+}
+
+nav#site-menu .menu-list .user-profile a:hover {
+    background: transparent !important;
+    transform: none !important;
 }
 
 nav#site-menu .menu-list .profile-pic {
@@ -344,4 +356,36 @@ a.menu-btn:hover { background: rgba(0,229,255,0.06) !important; transform: trans
     object-fit: cover;
     border: 3px solid var(--accent);
     box-shadow: 0 2px 8px rgba(0,229,255,0.3);
+}
+
+/* Tabs menu - para pestañas internas sin conflicto con menu principal */
+.tabs-menu {
+    width: 100%;
+}
+
+.tabs-inner {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabs-inner a {
+    color: var(--accent);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.16s;
+}
+
+.tabs-inner a:hover {
+    background: rgba(0,229,255,0.06);
+    border-color: rgba(0,229,255,0.08);
+}
+
+.tabs-inner a.active-tab {
+    background: linear-gradient(90deg, rgba(0,229,255,0.15), rgba(124,255,111,0.15));
+    border: 1px solid var(--accent);
+    font-weight: 700;
 }
