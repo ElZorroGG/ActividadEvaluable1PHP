@@ -16,6 +16,11 @@ try {
     $stmt = $conn->prepare("SELECT * FROM bibliotecajuegos WHERE id = :id LIMIT 1");
     $stmt->execute([":id" => $id]);
     $game = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($game) {
+        $stmtUpdate = $conn->prepare("UPDATE bibliotecajuegos SET visualizaciones = visualizaciones + 1 WHERE id = :id");
+        $stmtUpdate->execute([":id" => $id]);
+    }
 } catch (Exception $e) {
     $game = false;
 }

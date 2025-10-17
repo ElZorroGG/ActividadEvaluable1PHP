@@ -31,6 +31,12 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
         <p class="small">Autor / Estudio: <?php echo htmlspecialchars($game["autor"]); ?></p>
         <p class="small">Categoría: <?php echo htmlspecialchars($game["categoria"]); ?></p>
         <p class="small">Año: <?php echo htmlspecialchars($game["anio"]); ?></p>
+        <div class="estadisticas-vj" style="margin:16px 0;padding:12px;background:linear-gradient(90deg, rgba(0,229,255,0.08), rgba(124,255,111,0.08));border-radius:8px;border:1px solid rgba(0,229,255,0.15);">
+          <p class="small" style="margin:0;display:flex;align-items:center;gap:8px;">
+            <strong style="color:var(--accent);">Visitas:</strong> 
+            <span style="font-weight:700;font-size:16px;color:var(--accent);"><?php echo number_format((int)($game["visualizaciones"] ?? 0)); ?></span>
+          </p>
+        </div>
         <h3>Descripción</h3>
         <p><?php echo nl2br(htmlspecialchars($game["descripcion"])); ?></p>
         <?php if (!empty($game["url"])): ?>
