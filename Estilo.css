@@ -181,6 +181,27 @@ nav#site-menu .menu-list li a, .menu .menu-list li a, .menu .menu-list a, .menu 
 nav#site-menu .menu-list li a:hover, .menu .menu-list li a:hover, .menu .menu-list a:hover{background:rgba(0,229,255,0.06);border-color:rgba(0,229,255,0.08);transform:translateY(-2px)}
 .menu .menu-list li a.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:6px 10px}
 
+nav#site-menu .menu-list .user-profile {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+nav#site-menu .menu-list .profile-pic {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 2px 8px rgba(0,229,255,0.3) !important;
+    transition: transform 0.2s !important;
+    display: block !important;
+}
+
+nav#site-menu .menu-list .profile-pic:hover {
+    transform: scale(1.1) !important;
+}
+
 /* Mobile: collapse into hamburger */
 @media (max-width:640px){
     nav#site-menu .menu-inner{padding:10px}
@@ -188,6 +209,7 @@ nav#site-menu .menu-list li a:hover, .menu .menu-list li a:hover, .menu .menu-li
     nav#site-menu .menu-list{position:absolute;left:12px;right:12px;top:72px;display:flex;flex-direction:column;gap:8px;padding:12px;background:linear-gradient(180deg, rgba(2,6,12,0.9), rgba(2,6,12,0.95));border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,12,0.6);transform-origin:top;opacity:0;pointer-events:none;transition:all .18s}
     nav#site-menu.open .menu-list{opacity:1;pointer-events:auto;transform:translateY(0)}
     .menu .menu-list li a{display:block}
+    nav#site-menu .menu-list .user-profile{margin-left:0 !important;text-align:center;justify-content:center}
 }
 
 /* Focus states for accessibility */
@@ -264,3 +286,62 @@ a.menu-btn:hover { background: rgba(0,229,255,0.06) !important; transform: trans
 /* Detail view */
 .game-detail{display:flex;flex-direction:column;gap:12px}
 .cover-large img{max-width:420px}
+
+.foto-perfil-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.upload-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    border: 2px dashed rgba(255,255,255,0.2);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
+    width: 100%;
+    max-width: 400px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.upload-box:hover {
+    border-color: var(--accent);
+    background: rgba(0,229,255,0.05);
+}
+
+.upload-box label {
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.upload-box small {
+    color: var(--muted);
+    text-align: center;
+}
+
+.upload-box input[type="file"] {
+    display: none;
+}
+
+.preview-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.preview-foto {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+    box-shadow: 0 2px 8px rgba(0,229,255,0.3);
+}

@@ -26,11 +26,29 @@ document.addEventListener('DOMContentLoaded', function () {
       var passwordInput = document.getElementById('contraseña');
       showHint(passwordInput ? passwordInput.value : "");
     });
+
+function previewImage(input) {
+    const preview = document.getElementById('preview-foto');
+    const previewContainer = document.getElementById('preview-container');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            previewContainer.style.display = 'flex';
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        previewContainer.style.display = 'none';
+    }
+}
     
   </script>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width,initial-scale=1">
-   <link rel="stylesheet" href="/ActividadEvaluable1PHP/Estilo.css">
+   <link rel="stylesheet" href="/ActividadEvaluable1PHP/Estilo.css?v=2">
    <title>Registro</title>
 </head>
 <body>
@@ -42,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <div class="notice error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
 
-  <form action="/ActividadEvaluable1PHP/DatosUsuario/Formulario.php" method="post" id="Formulario">
+  <form action="/ActividadEvaluable1PHP/DatosUsuario/Formulario.php" method="post" id="Formulario" enctype="multipart/form-data">
       <div class="form-row">
         <label for="nombre">Su nombre</label>
         <input name="nombre" id="nombre" type="text" value="<?php echo htmlspecialchars($prefill["nombre"]); ?>" required>
@@ -61,6 +79,19 @@ document.addEventListener('DOMContentLoaded', function () {
       <div class="form-row">
         <label for="CorfirmaContraseña">Confirmar contraseña</label>
         <input name="CorfirmaContraseña" id="CorfirmaContraseña" type="password">
+      </div>
+
+      <div class="foto-perfil-container">
+        <div class="upload-box" onclick="document.getElementById('fotoPerfil').click()">
+          <label for="fotoPerfil">📷 Foto de perfil (opcional)</label>
+          <small>Haz clic para seleccionar una imagen<br>Máximo 5MB · JPG, PNG, GIF, WEBP</small>
+          <input name="fotoPerfil" id="fotoPerfil" type="file" accept="image/jpeg,image/png,image/gif,image/webp" onchange="previewImage(this)">
+        </div>
+        
+        <div id="preview-container" class="preview-container">
+          <img id="preview-foto" class="preview-foto" src="" alt="Vista previa">
+          <small>Vista previa de tu foto de perfil</small>
+        </div>
       </div>
       <p id="Sugerencia"><span id="txtHint"></span></p>
 

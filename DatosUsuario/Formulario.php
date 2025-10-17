@@ -1,13 +1,23 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 require __DIR__ . '/../Conexion.php';
-//Datos recogidos en el registro
+
 $error = "";
 $nombre = trim($_POST["nombre"] ?? "");
 $email = trim($_POST["email"] ?? "");
 $pass = $_POST["contraseña"] ?? "";
 $pass2 = $_POST["CorfirmaContraseña"] ?? "";
-    //Requisitos de seguridad para que el usuario no la cague
+
+$carpetaFotoPerfil = __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "FotoPerfil";
+if (!is_dir($carpetaFotoPerfil)) {
+    mkdir($carpetaFotoPerfil, 0755, true);
+}
+
+$carpetaDefecto = __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "PerfilPorDefecto";
+if (!is_dir($carpetaDefecto)) {
+    mkdir($carpetaDefecto, 0755, true);
+}
+
 if ($nombre === "") {
     $error .= "Nombre vacío. ";
 }
@@ -49,6 +59,54 @@ if ($error === "") {
     }
 }
 //Si hay un error con variables de session redirige de nuevo al registro rellenando los campos importantes de el registro
+$rutaFotoPerfil = null;
+
+if ($error === "" && isset($_FILES["fotoPerfil"]) && $_FILES["fotoPerfil"]["error"] == UPLOAD_ERR_OK) {
+    $temporal = $_FILES["fotoPerfil"]["tmp_name"];
+    $size = $_FILES["fotoPerfil"]["size"];
+    $name = $_FILES["fotoPerfil"]["name"];
+
+    if ($size > 5 * 1024 * 1024) {
+        $error .= "La foto de perfil es demasiado grande (max 5MB). ";
+    } else {
+        $partes = explode(".", $name);
+        $ext = strtolower(end($partes));
+        $permitidas = array("jpg", "jpeg", "png", "gif", "webp");
+        
+        if (!in_array($ext, $permitidas)) {
+            $error .= "Tipo de imagen no permitido. Usa JPG, PNG, GIF o WEBP. ";
+        } else {
+            $contenido = file_get_contents($temporal);
+            $hash = hash("sha256", $contenido);
+            $nuevoNombre = $hash . "." . $ext;
+            $destino = $carpetaFotoPerfil . DIRECTORY_SEPARATOR . $nuevoNombre;
+
+            $intentos = 0;
+            while (file_exists($destino) && $intentos < 5) {
+                $sufijo = substr(bin2hex(random_bytes(4)), 0, 6);
+                $nuevoNombre = $hash . "_" . $sufijo . "." . $ext;
+                $destino = $carpetaFotoPerfil . DIRECTORY_SEPARATOR . $nuevoNombre;
+                $intentos++;
+            }
+
+            if (move_uploaded_file($temporal, $destino)) {
+                $rutaFotoPerfil = 'FotoPerfil/' . $nuevoNombre;
+            } else {
+                $error .= "No se pudo guardar la foto de perfil. ";
+            }
+        }
+    }
+}
+
+if ($rutaFotoPerfil === null) {
+    $archivosDef = glob($carpetaDefecto . DIRECTORY_SEPARATOR . "*.{jpg,jpeg,png,gif,webp}", GLOB_BRACE);
+    if (!empty($archivosDef)) {
+        $rutaFotoPerfil = 'PerfilPorDefecto/' . basename($archivosDef[0]);
+    } else {
+        $rutaFotoPerfil = '/ActividadEvaluable1PHP/PerfilPorDefecto/default.png';
+    }
+}
+
 if ($error !== "") {
     $_SESSION["Error"] = $error;
     $_SESSION["nombre"] = $nombre;
@@ -56,13 +114,14 @@ if ($error !== "") {
     header("Location: /ActividadEvaluable1PHP/DatosUsuario/Registro.php");
     exit;
 }
-//Si todo va bien ejecuta el try y se conecta a la base de datos creando el usuario y encriptando la contraseña
+
 try {
     $hash = password_hash($pass, PASSWORD_DEFAULT);
-    $stmt = $conn->prepare("INSERT INTO users (Nombre, password, mail) VALUES (:nombre, :password, :mail)");
+    $stmt = $conn->prepare("INSERT INTO users (Nombre, password, mail, foto_perfil) VALUES (:nombre, :password, :mail, :foto_perfil)");
     $stmt->bindValue(":nombre", $nombre);
     $stmt->bindValue(":password", $hash);
     $stmt->bindValue(":mail", $email);
+    $stmt->bindValue(":foto_perfil", $rutaFotoPerfil);
     $stmt->execute();
 
     $_SESSION["Log"] = $email;

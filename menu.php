@@ -2,6 +2,28 @@
 
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 $logged = !empty($_SESSION["Usuario"]);
+$fotoPerfil = null;
+
+if ($logged && !empty($_SESSION["user_id"])) {
+    require_once __DIR__ . '/Conexion.php';
+    try {
+        $stmt = $conn->prepare("SELECT foto_perfil FROM users WHERE id = :id LIMIT 1");
+        $stmt->execute([':id' => $_SESSION["user_id"]]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($user) {
+            $fotoPerfil = $user['foto_perfil'];
+            if ($fotoPerfil && strpos($fotoPerfil, '/') !== 0) {
+                $fotoPerfil = '/ActividadEvaluable1PHP/' . $fotoPerfil;
+            }
+        }
+    } catch (PDOException $e) {
+        $fotoPerfil = '/ActividadEvaluable1PHP/PerfilPorDefecto/Perfil.webp';
+    }
+}
+
+if ($fotoPerfil === null) {
+    $fotoPerfil = '/ActividadEvaluable1PHP/PerfilPorDefecto/Perfil.webp';
+}
 ?>
 <nav class="menu" id="site-menu">
   <div class="menu-inner">
@@ -15,6 +37,9 @@ $logged = !empty($_SESSION["Usuario"]);
           <li><a href="/ActividadEvaluable1PHP/BibliotecaDeJuegos/CreaBiblioteca.php">Crear juego</a></li>
           <li><a href="/ActividadEvaluable1PHP/BibliotecaDeJuegos/VerJuegos.php">Ver juegos</a></li>
           <li><a class="secondary" href="/ActividadEvaluable1PHP/cerrarSession.php">Cerrar sesión</a></li>
+          <li class="user-profile">
+            <img src="<?php echo htmlspecialchars($fotoPerfil); ?>" alt="Foto de perfil" class="profile-pic">
+          </li>
         <?php endif; ?>
     </ul>
   </div>
