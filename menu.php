@@ -38,7 +38,9 @@ if ($fotoPerfil === null) {
           <li><a href="/ActividadEvaluable1PHP/BibliotecaDeJuegos/VerJuegos.php">Ver juegos</a></li>
           <li><a class="secondary" href="/ActividadEvaluable1PHP/cerrarSession.php">Cerrar sesión</a></li>
           <li class="user-profile">
-            <img src="<?php echo htmlspecialchars($fotoPerfil); ?>" alt="Foto de perfil" class="profile-pic">
+            <a href="/ActividadEvaluable1PHP/PerfilUsuario/EditarPerfil.php" title="Editar perfil">
+              <img src="<?php echo htmlspecialchars($fotoPerfil); ?>" alt="Foto de perfil" class="profile-pic">
+            </a>
           </li>
         <?php endif; ?>
     </ul>

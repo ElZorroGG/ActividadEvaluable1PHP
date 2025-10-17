@@ -7,7 +7,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Ver Juegos</title>
-  <link rel="stylesheet" href="/ActividadEvaluable1PHP/Estilo.css">
+  <link rel="stylesheet" href="/ActividadEvaluable1PHP/Estilo.css?v=4">
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
@@ -15,17 +15,21 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 <div class="container">
   <div class="panel">
     <h1>Juegos</h1>
+    <?php if ($deleted ?? false): ?>
+      <div class="notice success">Juego eliminado correctamente.</div>
+    <?php endif; ?>
+    <?php if ($error ?? false): ?>
+      <div class="notice error">Error al eliminar el juego. Inténtalo de nuevo.</div>
+    <?php endif; ?>
     <form style="margin-bottom: 20px; margin-top: 12px;">
         <input type="text" id="searchInput" size="30" placeholder="Buscar juegos..." style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;" value="<?php echo htmlspecialchars($busqueda ?? ''); ?>">
     </form>
     <div x-data="{tab: 'todos'}" style="margin-top:12px">
-      <div class="menu" style="margin-bottom:8px;">
-          <div class="menu-inner" style="padding:8px">
-          <div class="menu-list">
-            <a href="#" :class='{"active-tab": tab==="todos"}' @click.prevent='tab="todos"'>Todos</a>
-            <a href="#" :class='{"active-tab": tab==="mios"}' @click.prevent='tab="mios"'>Mis juegos</a>
+      <div class="tabs-menu" style="margin-bottom:12px;">
+          <div class="tabs-inner" style="padding:8px;display:flex;gap:8px;justify-content:center;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border-radius:10px;">
+            <a href="#" :class='{"active-tab": tab==="todos"}' @click.prevent='tab="todos"' style="color:var(--accent);text-decoration:none;padding:8px 16px;border-radius:8px;border:1px solid transparent;transition:all .16s">Todos</a>
+            <a href="#" :class='{"active-tab": tab==="mios"}' @click.prevent='tab="mios"' style="color:var(--accent);text-decoration:none;padding:8px 16px;border-radius:8px;border:1px solid transparent;transition:all .16s">Mis juegos</a>
           </div>
-        </div>
       </div>
 
       <div x-show="tab==='todos'">

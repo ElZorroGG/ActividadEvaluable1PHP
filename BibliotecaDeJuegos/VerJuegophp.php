@@ -43,6 +43,10 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
       <a class="button menu-btn" href="/ActividadEvaluable1PHP/BibliotecaDeJuegos/VerJuegos.php">Volver a la lista</a>
       <?php if ((int)($game["user_id"] ?? 0) === (int)($_SESSION["user_id"] ?? $_SESSION["id"] ?? 0)): ?>
         <a class="button menu-btn" href="/ActividadEvaluable1PHP/BibliotecaDeJuegos/VerJuegoEditar.php?id=<?php echo (int)$game["id"]; ?>">Editar</a>
+        <form method="post" action="/ActividadEvaluable1PHP/BibliotecaDeJuegos/EliminarJuego.php" style="display:inline-block;margin:0;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este juego? Esta acción no se puede deshacer.');">
+          <input type="hidden" name="id" value="<?php echo (int)$game["id"]; ?>">
+          <button type="submit" class="button secondary" style="background:linear-gradient(90deg,var(--danger), #ff7a8b);color:#fff;border:none;">Eliminar</button>
+        </form>
       <?php endif; ?>
     </div>
   </div>

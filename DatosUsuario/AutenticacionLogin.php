@@ -1,8 +1,6 @@
 <?php
-//Codigo php del login
-//Si la sesion no esta iniciada la inicia
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-require __DIR__ . '/../Conexion.php';
+require_once __DIR__ . '/../Conexion.php';
 
 $passwordInput = null;
 if (isset($_POST["contrasena"])) {

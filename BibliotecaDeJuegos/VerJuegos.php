@@ -8,6 +8,8 @@ require_once __DIR__ . '/../Conexion.php';
 
 $userId = (int)($_SESSION["user_id"] ?? 0);
 $busqueda = $_GET["q"] ?? "";
+$deleted = isset($_GET["deleted"]) ? true : false;
+$error = isset($_GET["error"]) ? true : false;
 
 try {
     if (!empty($busqueda)) {

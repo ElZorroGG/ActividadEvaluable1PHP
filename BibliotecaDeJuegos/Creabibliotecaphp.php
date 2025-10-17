@@ -1,7 +1,7 @@
 <?php
 
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-require(__DIR__ . '/../Conexion.php');
+require_once __DIR__ . '/../Conexion.php';
 
 
 if (empty($_SESSION["Usuario"]) || (empty($_SESSION["user_id"]) && empty($_SESSION["id"]))) {

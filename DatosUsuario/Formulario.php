@@ -1,6 +1,6 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-require __DIR__ . '/../Conexion.php';
+require_once __DIR__ . '/../Conexion.php';
 
 $error = "";
 $nombre = trim($_POST["nombre"] ?? "");

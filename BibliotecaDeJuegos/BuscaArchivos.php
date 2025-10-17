@@ -4,7 +4,7 @@ if (!isset($_SESSION["Usuario"])) {
     header("Location: /ActividadEvaluable1PHP/login.php");
     exit;
 }
-require(__DIR__ . '/../Conexion.php');
+require_once __DIR__ . '/../Conexion.php';
 $q = $_GET["q"] ?? '';
 
 try {
