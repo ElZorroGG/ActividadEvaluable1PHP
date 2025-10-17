@@ -4,6 +4,18 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <script>
+function getVote(int) {
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("poll").innerHTML=this.responseText;
+    }
+  }
+  xmlhttp.open("GET","poll_vote.php?vote="+int,true);
+  xmlhttp.send();
+}
+</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title><?php echo htmlspecialchars($game["titulo"]); ?></title>
@@ -31,6 +43,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
         <p class="small">Autor / Estudio: <?php echo htmlspecialchars($game["autor"]); ?></p>
         <p class="small">Categoría: <?php echo htmlspecialchars($game["categoria"]); ?></p>
         <p class="small">Año: <?php echo htmlspecialchars($game["anio"]); ?></p>
+        <p class="small"><?php echo htmlspecialchars($game["upvote"]." votos positivos ".htmlspecialchars($game["downvote"])." votos negativos"); ?></p>
         <div class="estadisticas-vj" style="margin:16px 0;padding:12px;background:linear-gradient(90deg, rgba(0,229,255,0.08), rgba(124,255,111,0.08));border-radius:8px;border:1px solid rgba(0,229,255,0.15);">
           <p class="small" style="margin:0;display:flex;align-items:center;gap:8px;">
             <strong style="color:var(--accent);">Visitas:</strong> 
@@ -43,6 +56,11 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
           <p><a href="<?php echo htmlspecialchars($game["url"]); ?>" target="_blank">Sitio oficial</a></p>
         <?php endif; ?>
       </div>
+      <h3>Recomendarias o no este juego?</h3>
+      <form>
+        Yes: <input type="radio" name="vote" value="0" onclick="getVote(this.value)"><br>
+        No: <input type="radio" name="vote" value="1" onclick="getVote(this.value)">
+      </form>
     </div>
 
     <div class="panel-footer-vj">
@@ -54,6 +72,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
           <button type="submit" class="button secondary" style="background:linear-gradient(90deg,var(--danger), #ff7a8b);color:#fff;border:none;">Eliminar</button>
         </form>
       <?php endif; ?>
+      
     </div>
   </div>
 </div>

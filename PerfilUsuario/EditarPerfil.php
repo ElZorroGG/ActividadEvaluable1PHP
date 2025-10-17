@@ -88,7 +88,6 @@ if (!empty($fotoPerfilTemp) && $fotoPerfilTemp !== '') {
             <div class="form-row">
                 <label for="contraseñaActual">Contraseña actual (solo si cambias la contraseña)</label>
                 <input name="contraseñaActual" id="contraseñaActual" type="password" placeholder="Ingresa tu contraseña actual">
-                <small>Solo necesaria si vas a cambiar tu contraseña</small>
             </div>
 
             <div class="form-row">
