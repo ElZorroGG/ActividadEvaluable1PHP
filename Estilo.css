@@ -389,3 +389,104 @@ a.menu-btn:hover { background: rgba(0,229,255,0.06) !important; transform: trans
     border: 1px solid var(--accent);
     font-weight: 700;
 }
+
+/* Estadísticas de Juegos */
+.stats-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, rgba(0,229,255,0.1), rgba(124,255,111,0.1));
+    border: 1px solid rgba(0,229,255,0.2);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.stat-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+.stat-card .stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.stats-table th {
+    background: linear-gradient(180deg, rgba(0,229,255,0.15), rgba(0,229,255,0.08));
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--accent);
+    border-bottom: 2px solid rgba(0,229,255,0.3);
+}
+
+.stats-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.stats-table tr:hover {
+    background: rgba(0,229,255,0.05);
+}
+
+.stats-table .game-title {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.stats-table .views-count {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--accent-2);
+}
+
+.no-games {
+    text-align: center;
+    padding: 40px;
+    color: var(--muted);
+}
+
+.rank {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.rank-1 {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #000;
+}
+
+.rank-2 {
+    background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+    color: #000;
+}
+
+.rank-3 {
+    background: linear-gradient(135deg, #cd7f32, #e8a87c);
+    color: #000;
+}
+
+.rank-other {
+    background: rgba(255,255,255,0.05);
+    color: var(--muted);
+}

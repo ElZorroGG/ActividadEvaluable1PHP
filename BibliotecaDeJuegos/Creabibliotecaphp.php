@@ -6,7 +6,7 @@ require_once __DIR__ . '/../Conexion.php';
 
 if (empty($_SESSION["Usuario"]) || (empty($_SESSION["user_id"]) && empty($_SESSION["id"]))) {
     $_SESSION["ErrorAñadirJuego"] = "Debes iniciar sesión para añadir un juego.";
-    header("Location: /ActividadEvaluable1PHP/login.php");
+    header("Location: /ActividadEvaluable1PHP/DatosUsuario/login.php");
     exit;
 }
 

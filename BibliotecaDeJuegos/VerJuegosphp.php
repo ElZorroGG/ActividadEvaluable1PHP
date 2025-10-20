@@ -48,9 +48,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
               <div class="meta">
                 <div class="title"><?php echo $title; ?></div>
                 <div class="author small"><?php echo $autor; ?></div>
-                <div class="views-counter" style="display:flex;align-items:center;gap:4px;margin-top:6px;opacity:0.9;">
-                  <span style="font-size:12px;"><?php echo number_format((int)($j["visualizaciones"] ?? 0)); ?> visitas</span>
-                </div>
               </div>
             </div>
           </a>
@@ -74,9 +71,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
               <div class="meta">
                 <div class="title"><?php echo $title; ?></div>
                 <div class="author small"><?php echo $autor; ?></div>
-                <div class="views-counter" style="display:flex;align-items:center;gap:4px;margin-top:6px;opacity:0.9;">
-                  <span style="font-size:12px;"><?php echo number_format((int)($j["visualizaciones"] ?? 0)); ?> visitas</span>
-                </div>
               </div>
             </div>
           </a>

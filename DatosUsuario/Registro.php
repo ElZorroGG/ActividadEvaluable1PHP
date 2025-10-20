@@ -83,7 +83,7 @@ function previewImage(input) {
 
       <div class="foto-perfil-container">
         <div class="upload-box" onclick="document.getElementById('fotoPerfil').click()">
-          <label for="fotoPerfil">📷 Foto de perfil (opcional)</label>
+          <label for="fotoPerfil">Foto de perfil (opcional)</label>
           <small>Haz clic para seleccionar una imagen<br>Máximo 5MB · JPG, PNG, GIF, WEBP</small>
           <input name="fotoPerfil" id="fotoPerfil" type="file" accept="image/jpeg,image/png,image/gif,image/webp" onchange="previewImage(this)">
         </div>

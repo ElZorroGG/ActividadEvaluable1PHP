@@ -105,7 +105,7 @@ if (!empty($fotoPerfilTemp) && $fotoPerfilTemp !== '') {
                 <img src="<?php echo htmlspecialchars((string)$fotoPerfil); ?>" alt="Foto actual" class="preview-foto">
                 
                 <div class="upload-box" onclick="document.getElementById('fotoPerfil').click()">
-                    <label for="fotoPerfil">📷 Cambiar foto de perfil</label>
+                    <label for="fotoPerfil">Cambiar foto de perfil</label>
                     <small>Haz clic para seleccionar una nueva imagen<br>Máximo 5MB · JPG, PNG, GIF, WEBP</small>
                     <input name="fotoPerfil" id="fotoPerfil" type="file" accept="image/jpeg,image/png,image/gif,image/webp" onchange="previewImage(this)">
                 </div>

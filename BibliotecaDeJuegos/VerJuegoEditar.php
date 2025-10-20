@@ -6,7 +6,7 @@ unset($_SESSION["ErrorEditar"], $_SESSION["ExitoEditar"]);
 
 if (!isset($game)) {
   if (!isset($_SESSION["Usuario"])) {
-    header("Location: /ActividadEvaluable1PHP/login.php");
+    header("Location: /ActividadEvaluable1PHP/DatosUsuario/login.php");
     exit;
   }
 
