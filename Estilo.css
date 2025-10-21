@@ -490,3 +490,117 @@ a.menu-btn:hover { background: rgba(0,229,255,0.06) !important; transform: trans
     background: rgba(255,255,255,0.05);
     color: var(--muted);
 }
+
+/* Sistema de votación */
+.voting-section {
+    margin: 16px 0;
+    padding: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+}
+
+.voting-section h3 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+}
+
+.vote-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+.vote-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 80px;
+}
+
+.vote-btn.hidden {
+    display: none;
+}
+
+.vote-btn:hover:not(.active) {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.25);
+    transform: translateY(-2px);
+}
+
+.vote-btn.active {
+    border-color: var(--accent);
+    background: rgba(0,229,255,0.1);
+}
+
+.vote-btn.upvote.active {
+    border-color: var(--accent-2);
+    background: rgba(124,255,111,0.1);
+}
+
+.vote-btn.downvote.active {
+    border-color: var(--danger);
+    background: rgba(255,77,109,0.1);
+}
+
+.vote-btn .vote-icon {
+    font-size: 32px;
+    transition: transform 0.2s ease;
+}
+
+.vote-btn:hover .vote-icon {
+    transform: scale(1.1);
+}
+
+.vote-btn.active .vote-icon {
+    transform: scale(1.15);
+}
+
+.vote-btn .vote-count {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+}
+
+.vote-btn.active .vote-count {
+    color: rgba(255,255,255,0.95);
+}
+
+.vote-message {
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    display: none;
+}
+
+.vote-message.success {
+    background: rgba(124,255,111,0.15);
+    color: var(--accent-2);
+}
+
+.vote-message.error {
+    background: rgba(255,77,109,0.15);
+    color: var(--danger);
+}
+
+.vote-stats {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+}

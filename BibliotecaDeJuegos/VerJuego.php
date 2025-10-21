@@ -20,6 +20,14 @@ try {
     if ($game) {
         $stmtUpdate = $conn->prepare("UPDATE bibliotecajuegos SET visualizaciones = visualizaciones + 1 WHERE id = :id");
         $stmtUpdate->execute([":id" => $id]);
+        
+        // Verificar si el usuario ya votó este juego
+        $userId = (int)$_SESSION["user_id"];
+        $stmtVote = $conn->prepare("SELECT vote_type FROM game_votes WHERE user_id = :user_id AND game_id = :game_id LIMIT 1");
+        $stmtVote->execute([':user_id' => $userId, ':game_id' => $id]);
+        $userVote = $stmtVote->fetch(PDO::FETCH_ASSOC);
+        
+        $game['user_vote'] = $userVote ? (int)$userVote['vote_type'] : null;
     }
 } catch (Exception $e) {
     $game = false;
