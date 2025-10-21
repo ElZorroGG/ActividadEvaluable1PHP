@@ -33,6 +33,13 @@ unset($_SESSION["ErrorLogin"], $_SESSION["nombre_login"]);
         <input id="contrasena" name="contrasena" type="password" required>
       </div>
 
+      <div class="form-row">
+        <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);">
+          <input type="checkbox" name="recordar" value="1" style="margin:0;">
+          Recordar sesión por 1 hora
+        </label>
+      </div>
+
       <div class="actions">
         <button type="submit" style="display:none">Entrar</button>
       </div>

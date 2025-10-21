@@ -1,6 +1,7 @@
 <?php
-if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-if (!isset($_SESSION["Usuario"])) {
+require_once __DIR__ . '/verificarSesion.php';
+
+if (!verificarSesion()) {
     header("Location: /ActividadEvaluable1PHP/DatosUsuario/login.php");
     exit;
 }
