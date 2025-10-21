@@ -82,7 +82,7 @@ if (!empty($fotoPerfilTemp) && $fotoPerfilTemp !== '') {
         <form action="/ActividadEvaluable1PHP/PerfilUsuario/EditarPerfilPHP.php" method="post" enctype="multipart/form-data">
             <div class="form-row">
                 <label for="nombre">Nombre de usuario</label>
-                <input name="nombre" id="nombre" type="text" value="<?php echo htmlspecialchars($user['Nombre'] ?? ''); ?>" required>
+                <input name="nombre" id="nombre" type="text" value="<?php echo htmlspecialchars($user['Nombre'] ?? ''); ?>">
             </div>
 
             <div class="form-row">

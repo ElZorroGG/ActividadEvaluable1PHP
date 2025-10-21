@@ -20,7 +20,7 @@ if (!is_dir($carpetaFotoPerfil)) {
 }
 
 if ($nombre === "") {
-    $error .= "El nombre no puede estar vacío. ";
+    $nombre=$_SESSION["Usuario"];
 }
 
 if (!empty($contraseñaNueva) && $contraseñaActual === "") {

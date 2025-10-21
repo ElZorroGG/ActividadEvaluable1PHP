@@ -53,7 +53,7 @@ function cerrarSesionCompleta() {
             $stmt = $conn->prepare("UPDATE users SET remember_token = NULL, remember_expiry = NULL WHERE id = :id");
             $stmt->execute([":id" => $userId]);
         } catch (PDOException $e) {
-            error_log("Error limpiando token de sesión: " . $e->getMessage());
+            error_log("Error de token de sesión: " . $e->getMessage());
         }
         
         setcookie("remember_token", "", time() - 3600, "/");
