@@ -7,11 +7,11 @@ function verificarSesion() {
     }
     
     if (isset($_COOKIE["remember_token"]) && isset($_COOKIE["remember_user"])) {
-        require_once __DIR__ . '/Conexion.php';
+        require_once __DIR__ . "/Conexion.php";
         
         $token = $_COOKIE["remember_token"];
         $userId = (int)$_COOKIE["remember_user"];
-        $hashedToken = hash('sha256', $token);
+        $hashedToken = hash("sha256", $token);
         
         try {
             $stmt = $conn->prepare("
@@ -21,7 +21,7 @@ function verificarSesion() {
                 AND remember_expiry > NOW() 
                 LIMIT 1
             ");
-            $stmt->execute([':id' => $userId, ':token' => $hashedToken]);
+            $stmt->execute([":id" => $userId, ":token" => $hashedToken]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             
             if ($user) {
@@ -45,13 +45,13 @@ function cerrarSesionCompleta() {
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
     
     if (isset($_COOKIE["remember_token"]) && isset($_COOKIE["remember_user"])) {
-        require_once __DIR__ . '/Conexion.php';
+        require_once __DIR__ . "/Conexion.php";
         
         $userId = (int)$_COOKIE["remember_user"];
         
         try {
             $stmt = $conn->prepare("UPDATE users SET remember_token = NULL, remember_expiry = NULL WHERE id = :id");
-            $stmt->execute([':id' => $userId]);
+            $stmt->execute([":id" => $userId]);
         } catch (PDOException $e) {
             error_log("Error limpiando token de sesión: " . $e->getMessage());
         }

@@ -5,24 +5,26 @@ $logged = !empty($_SESSION["Usuario"]);
 $fotoPerfil = null;
 
 if ($logged && !empty($_SESSION["user_id"])) {
-    require_once __DIR__ . '/Conexion.php';
     try {
-        $stmt = $conn->prepare("SELECT foto_perfil FROM users WHERE id = :id LIMIT 1");
-        $stmt->execute([':id' => $_SESSION["user_id"]]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user) {
-            $fotoPerfil = $user['foto_perfil'];
-            if ($fotoPerfil && strpos($fotoPerfil, '/') !== 0) {
-                $fotoPerfil = '/ActividadEvaluable1PHP/' . $fotoPerfil;
+        require_once __DIR__ . "/Conexion.php";
+        if (isset($conn) && $conn !== null) {
+            $stmt = $conn->prepare("SELECT foto_perfil FROM users WHERE id = :id LIMIT 1");
+            $stmt->execute([":id" => $_SESSION["user_id"]]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($user) {
+                $fotoPerfil = $user["foto_perfil"];
+                if ($fotoPerfil && strpos($fotoPerfil, "/") !== 0) {
+                    $fotoPerfil = "/ActividadEvaluable1PHP/" . $fotoPerfil;
+                }
             }
         }
-    } catch (PDOException $e) {
-        $fotoPerfil = '/ActividadEvaluable1PHP/PerfilPorDefecto/Perfil.webp';
+    } catch (Exception $e) {
+        $fotoPerfil = "/ActividadEvaluable1PHP/PerfilPorDefecto/Perfil.webp";
     }
 }
 
 if ($fotoPerfil === null) {
-    $fotoPerfil = '/ActividadEvaluable1PHP/PerfilPorDefecto/Perfil.webp';
+    $fotoPerfil = "/ActividadEvaluable1PHP/PerfilPorDefecto/Perfil.webp";
 }
 ?>
 <nav class="menu" id="site-menu">

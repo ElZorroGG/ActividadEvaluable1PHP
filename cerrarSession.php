@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/verificarSesion.php';
+require_once __DIR__ . "/verificarSesion.php";
 
 $_SESSION = [];
 cerrarSesionCompleta();

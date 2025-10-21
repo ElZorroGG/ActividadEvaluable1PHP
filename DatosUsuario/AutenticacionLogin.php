@@ -30,16 +30,16 @@ try {
         
         if (isset($_POST["recordar"]) && $_POST["recordar"] == "1") {
             $token = bin2hex(random_bytes(32));
-            $expiry = time() + (1 * 60 * 60);
+            $expiry = time() + (1 * 60);
             
             setcookie("remember_token", $token, $expiry, "/", "", false, true);
             setcookie("remember_user", $user["id"], $expiry, "/", "", false, true);
             
             $stmt = $conn->prepare("UPDATE users SET remember_token = :token, remember_expiry = :expiry WHERE id = :id");
             $stmt->execute([
-                ':token' => hash('sha256', $token),
-                ':expiry' => date('Y-m-d H:i:s', $expiry),
-                ':id' => $user["id"]
+                ":token" => hash("sha256", $token),
+                ":expiry" => date("Y-m-d H:i:s", $expiry),
+                ":id" => $user["id"]
             ]);
         }
         

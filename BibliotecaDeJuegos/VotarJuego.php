@@ -1,34 +1,34 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
-header('Content-Type: application/json');
+header("Content-Type: application/json");
 
 if (!isset($_SESSION["Usuario"]) || !isset($_SESSION["user_id"])) {
     echo json_encode([
-        'success' => false,
-        'message' => 'Debes iniciar sesión para votar'
+        "success" => false,
+        "message" => "Debes iniciar sesión para votar"
     ]);
     exit;
 }
 
-require_once __DIR__ . '/../Conexion.php';
+require_once __DIR__ . "/../Conexion.php";
 
-$gameId = isset($_POST['game_id']) ? (int)$_POST['game_id'] : 0;
-$voteType = isset($_POST['vote_type']) ? (int)$_POST['vote_type'] : -1;
+$gameId = isset($_POST["game_id"]) ? (int)$_POST["game_id"] : 0;
+$voteType = isset($_POST["vote_type"]) ? (int)$_POST["vote_type"] : -1;
 $userId = (int)$_SESSION["user_id"];
 
 if ($gameId <= 0) {
     echo json_encode([
-        'success' => false,
-        'message' => 'ID de juego inválido'
+        "success" => false,
+        "message" => "ID de juego inválido"
     ]);
     exit;
 }
 
 if ($voteType !== 0 && $voteType !== 1) {
     echo json_encode([
-        'success' => false,
-        'message' => 'Tipo de voto inválido'
+        "success" => false,
+        "message" => "Tipo de voto inválido"
     ]);
     exit;
 }
@@ -40,16 +40,16 @@ try {
     
     if (!$game) {
         echo json_encode([
-            'success' => false,
-            'message' => 'El juego no existe'
+            "success" => false,
+            "message" => "El juego no existe"
         ]);
         exit;
     }
     
-    if ((int)$game['user_id'] === $userId) {
+    if ((int)$game["user_id"] === $userId) {
         echo json_encode([
-            'success' => false,
-            'message' => 'No puedes votar tu propio juego'
+            "success" => false,
+            "message" => "No puedes votar tu propio juego"
         ]);
         exit;
     }
@@ -60,8 +60,8 @@ try {
     
     if ($existingVote) {
         echo json_encode([
-            'success' => false,
-            'message' => 'Ya has votado este juego. El voto es permanente.'
+            "success" => false,
+            "message" => "Ya has votado este juego. El voto es permanente."
         ]);
         exit;
     }
@@ -86,12 +86,12 @@ try {
         $counts = $stmtCounts->fetch(PDO::FETCH_ASSOC);
         
         echo json_encode([
-            'success' => true,
-            'action' => 'added',
-            'message' => 'Voto registrado',
-            'upvotes' => (int)$counts['upvote'],
-            'downvotes' => (int)$counts['downvote'],
-            'userVote' => $voteType
+            "success" => true,
+            "action" => "added",
+            "message" => "Voto registrado",
+            "upvotes" => (int)$counts["upvote"],
+            "downvotes" => (int)$counts["downvote"],
+            "userVote" => $voteType
         ]);
         exit;
     
@@ -101,8 +101,8 @@ try {
     }
     
     echo json_encode([
-        'success' => false,
-        'message' => 'Error al procesar el voto: ' . $e->getMessage()
+        "success" => false,
+        "message" => "Error al procesar el voto: " . $e->getMessage()
     ]);
     exit;
 } catch (Exception $e) {
@@ -111,8 +111,8 @@ try {
     }
     
     echo json_encode([
-        'success' => false,
-        'message' => 'Error inesperado: ' . $e->getMessage()
+        "success" => false,
+        "message" => "Error inesperado: " . $e->getMessage()
     ]);
     exit;
 }
