@@ -23,7 +23,6 @@ if ($nombre === "") {
     $error .= "El nombre no puede estar vacío. ";
 }
 
-// Solo requerir contraseña actual si se intenta cambiar la contraseña
 if (!empty($contraseñaNueva) && $contraseñaActual === "") {
     $error .= "Debes ingresar tu contraseña actual para cambiar la contraseña. ";
 }
@@ -31,10 +30,10 @@ if (!empty($contraseñaNueva) && $contraseñaActual === "") {
 if ($error === "" && !empty($contraseñaNueva)) {
     try {
         $stmt = $conn->prepare("SELECT password FROM users WHERE id = :id LIMIT 1");
-        $stmt->execute([':id' => $userId]);
+        $stmt->execute([":id" => $userId]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        if (!$user || !password_verify($contraseñaActual, $user['password'])) {
+        if (!$user || !password_verify($contraseñaActual, $user["password"])) {
             $error .= "La contraseña actual es incorrecta. ";
         }
     } catch (PDOException $e) {
@@ -97,7 +96,7 @@ if ($error === "" && isset($_FILES["fotoPerfil"]) && $_FILES["fotoPerfil"]["erro
             }
 
             if (move_uploaded_file($temporal, $destino)) {
-                $rutaFotoPerfil = 'FotoPerfil/' . $nuevoNombre;
+                $rutaFotoPerfil = "FotoPerfil/" . $nuevoNombre;
             } else {
                 $error .= "No se pudo guardar la foto de perfil. ";
             }
@@ -115,30 +114,30 @@ try {
     if ($cambiarContraseña && $rutaFotoPerfil) {
         $stmt = $conn->prepare("UPDATE users SET Nombre = :nombre, password = :password, foto_perfil = :foto WHERE id = :id");
         $stmt->execute([
-            ':nombre' => $nombre,
-            ':password' => $hashNuevo,
-            ':foto' => $rutaFotoPerfil,
-            ':id' => $userId
+            ":nombre" => $nombre,
+            ":password" => $hashNuevo,
+            ":foto" => $rutaFotoPerfil,
+            ":id" => $userId
         ]);
     } elseif ($cambiarContraseña) {
         $stmt = $conn->prepare("UPDATE users SET Nombre = :nombre, password = :password WHERE id = :id");
         $stmt->execute([
-            ':nombre' => $nombre,
-            ':password' => $hashNuevo,
-            ':id' => $userId
+            ":nombre" => $nombre,
+            ":password" => $hashNuevo,
+            ":id" => $userId
         ]);
     } elseif ($rutaFotoPerfil) {
         $stmt = $conn->prepare("UPDATE users SET Nombre = :nombre, foto_perfil = :foto WHERE id = :id");
         $stmt->execute([
-            ':nombre' => $nombre,
-            ':foto' => $rutaFotoPerfil,
-            ':id' => $userId
+            ":nombre" => $nombre,
+            ":foto" => $rutaFotoPerfil,
+            ":id" => $userId
         ]);
     } else {
         $stmt = $conn->prepare("UPDATE users SET Nombre = :nombre WHERE id = :id");
         $stmt->execute([
-            ':nombre' => $nombre,
-            ':id' => $userId
+            ":nombre" => $nombre,
+            ":id" => $userId
         ]);
     }
     

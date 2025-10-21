@@ -30,7 +30,6 @@ if ($pass === "" || $pass2 === "") {
 } elseif ($pass !== $pass2) {
     $error .= "Contraseñas no coinciden. ";
 } else {
-    //Requisitos de seguridad que considero necesarios
     $minLen = 8;
     $needs = [];
     if (mb_strlen($pass) < $minLen) $needs[] = "al menos $minLen caracteres";
@@ -43,7 +42,6 @@ if ($pass === "" || $pass2 === "") {
     }
 }
 
-//Comprueba que el mail no exista todavia
 if ($error === "") {
     try {
         $check = $conn->prepare("SELECT id FROM users WHERE mail = :mail LIMIT 1");
@@ -58,7 +56,6 @@ if ($error === "") {
         $error .= "Error al verificar el mail. Intenta de nuevo. ";
     }
 }
-//Si hay un error con variables de session redirige de nuevo al registro rellenando los campos importantes de el registro
 $rutaFotoPerfil = null;
 
 if ($error === "" && isset($_FILES["fotoPerfil"]) && $_FILES["fotoPerfil"]["error"] == UPLOAD_ERR_OK) {
@@ -90,7 +87,7 @@ if ($error === "" && isset($_FILES["fotoPerfil"]) && $_FILES["fotoPerfil"]["erro
             }
 
             if (move_uploaded_file($temporal, $destino)) {
-                $rutaFotoPerfil = 'FotoPerfil/' . $nuevoNombre;
+                $rutaFotoPerfil = "FotoPerfil/" . $nuevoNombre;
             } else {
                 $error .= "No se pudo guardar la foto de perfil. ";
             }
@@ -101,9 +98,9 @@ if ($error === "" && isset($_FILES["fotoPerfil"]) && $_FILES["fotoPerfil"]["erro
 if ($rutaFotoPerfil === null) {
     $archivosDef = glob($carpetaDefecto . DIRECTORY_SEPARATOR . "*.{jpg,jpeg,png,gif,webp}", GLOB_BRACE);
     if (!empty($archivosDef)) {
-        $rutaFotoPerfil = 'PerfilPorDefecto/' . basename($archivosDef[0]);
+        $rutaFotoPerfil = "PerfilPorDefecto/" . basename($archivosDef[0]);
     } else {
-        $rutaFotoPerfil = '/ActividadEvaluable1PHP/PerfilPorDefecto/default.png';
+        $rutaFotoPerfil = "/ActividadEvaluable1PHP/PerfilPorDefecto/default.png";
     }
 }
 

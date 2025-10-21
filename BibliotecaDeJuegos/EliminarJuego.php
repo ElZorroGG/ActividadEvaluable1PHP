@@ -16,7 +16,6 @@ if ($id <= 0) {
 }
 
 try {
-    // Verificar que el juego pertenece al usuario
     $stmt = $conn->prepare("SELECT user_id, caratula FROM bibliotecajuegos WHERE id = :id LIMIT 1");
     $stmt->execute([":id" => $id]);
     $game = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -26,21 +25,18 @@ try {
         exit;
     }
 
-    // Verificar que el usuario es el dueño del juego
     if ((int)$game["user_id"] !== (int)$_SESSION["user_id"]) {
         header("Location: /ActividadEvaluable1PHP/BibliotecaDeJuegos/VerJuegos.php");
         exit;
     }
 
-    // Eliminar la carátula si existe y no es la por defecto
-    if (!empty($game["caratula"]) && strpos($game["caratula"], 'CaratulaPorDefecto') === false) {
-        $caratulaPath = __DIR__ . '/../' . ltrim($game["caratula"], '/\\');
+    if (!empty($game["caratula"]) && strpos($game["caratula"], "CaratulaPorDefecto") === false) {
+        $caratulaPath = __DIR__ . "/../" . ltrim($game["caratula"], "/\\");
         if (file_exists($caratulaPath)) {
             @unlink($caratulaPath);
         }
     }
 
-    // Eliminar el juego de la base de datos
     $stmt = $conn->prepare("DELETE FROM bibliotecajuegos WHERE id = :id");
     $stmt->execute([":id" => $id]);
 
