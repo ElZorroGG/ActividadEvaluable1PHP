@@ -27,7 +27,7 @@ try {
         
         if (isset($_POST["recordar"]) && $_POST["recordar"] == "1") {
             $token = bin2hex(random_bytes(32));
-            $expiry = time() + (1 * 60);
+            $expiry = time() + (1 * 60*60);
             
             setcookie("remember_token", $token, $expiry, "/", "", false, true);
             setcookie("remember_user", $user["id"], $expiry, "/", "", false, true);
