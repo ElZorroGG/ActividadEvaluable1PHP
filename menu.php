@@ -20,7 +20,7 @@ if ($logged && !empty($_SESSION["user_id"])) {
         }
     } catch (Exception $e) {
         $fotoPerfil = "/ActividadEvaluable1PHP/PerfilPorDefecto/Perfil.webp";
-    }
+    }asd
 }
 
 if ($fotoPerfil === null) {
